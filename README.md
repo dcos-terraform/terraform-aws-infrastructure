@@ -42,10 +42,10 @@ module "dcos-master-instances" {
 
 | Name | Description |
 |------|-------------|
-| bootstrap.instance | Bottsrap instance ID |
-| bootstrap.os_user | Bottsrap instance OS default user |
-| bootstrap.private_ip | Bottsrap instance private ip |
-| bootstrap.public_ip | Bottsrap instance public ip |
+| bootstrap.instance | Bootstrap instance ID |
+| bootstrap.os_user | Bootstrap instance OS default user |
+| bootstrap.private_ip | Bootstrap instance private ip |
+| bootstrap.public_ip | Bootstrap instance public ip |
 | elb.masters_dns_name | This is the load balancer address to access the DC/OS UI |
 | elb.masters_internal_dns_name | This is the load balancer address to access the DC/OS UI |
 | elb.public_agents_dns_name | DNS Name of the public agent load balancer. |
