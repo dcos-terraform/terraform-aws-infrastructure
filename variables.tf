@@ -61,7 +61,117 @@ variable "aws_ami" {
   default     = ""
 }
 
-variable "aws_user_data" {
-  description = "If you're using a special AMI you might want to add userdata"
+variable "bootstrap_aws_ami" {
+  description = "[MASTER] AMI to be used"
   default     = ""
+}
+
+variable "bootstrap_os" {
+  description = "[BOOTSTRAP] Operating system to use. Instead of using your own AMI you could use a provided OS."
+  default     = ""
+}
+
+variable "bootstrap_root_volume_size" {
+  description = "[BOOTSTRAP] Root volume size"
+  default     = ""
+}
+
+variable "bootstrap_root_volume_type" {
+  description = "[BOOTSTRAP] Specify the root volume type."
+  default     = ""
+}
+
+variable "bootstrap_instance_type" {
+  description = "[BOOTSTRAP] Instance type"
+  default     = ""
+}
+
+variable "bootstrap_associate_public_ip_address" {
+  description = "[BOOTSTRAP] Associate a public ip address with there instances"
+  default     = true
+}
+
+variable "masters_aws_ami" {
+  description = "[MASTERS] AMI to be used"
+  default     = ""
+}
+
+variable "masters_os" {
+  description = "[MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS."
+  default     = ""
+}
+
+variable "masters_root_volume_size" {
+  description = "[MASTERS] Root volume size"
+  default     = ""
+}
+
+variable "masters_instance_type" {
+  description = "[MASTERS] Instance type"
+  default     = ""
+}
+
+variable "masters_associate_public_ip_address" {
+  description = "[MASTERS] Associate a public ip address with there instances"
+  default     = true
+}
+
+variable "private_agents_aws_ami" {
+  description = "[PRIVATE AGENTS] AMI to be used"
+  default     = ""
+}
+
+variable "private_agents_os" {
+  description = "[PRIVATE AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS."
+  default     = ""
+}
+
+variable "private_agents_root_volume_size" {
+  description = "[PRIVATE AGENTS] Root volume size"
+  default     = ""
+}
+
+variable "private_agents_root_volume_type" {
+  description = "[PRIVATE AGENTS] Specify the root volume type."
+  default     = ""
+}
+
+variable "private_agents_instance_type" {
+  description = "[PRIVATE AGENTS] Instance type"
+  default     = ""
+}
+
+variable "private_agents_associate_public_ip_address" {
+  description = "[PRIVATE AGENTS] Associate a public ip address with there instances"
+  default     = true
+}
+
+variable "public_agents_aws_ami" {
+  description = "[PUBLIC AGENTS] AMI to be used"
+  default     = ""
+}
+
+variable "public_agents_os" {
+  description = "[PUBLIC AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS."
+  default     = ""
+}
+
+variable "public_agents_root_volume_size" {
+  description = "[PUBLIC AGENTS] Root volume size"
+  default     = ""
+}
+
+variable "public_agents_root_volume_type" {
+  description = "[PUBLIC AGENTS] Specify the root volume type."
+  default     = ""
+}
+
+variable "public_agents_instance_type" {
+  description = "[PUBLIC AGENTS] Instance type"
+  default     = ""
+}
+
+variable "public_agents_associate_public_ip_address" {
+  description = "[PUBLIC AGENTS] Associate a public ip address with there instances"
+  default     = true
 }

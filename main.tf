@@ -94,6 +94,12 @@ module "dcos-bootstrap-instance" {
   aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
   aws_key_name           = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
 
+  dcos_instance_os                = "${coalesce(var.bootstrap_os,var.dcos_instance_os)}"
+  aws_root_volume_size            = "${var.bootstrap_root_volume_size}"
+  aws_root_volume_type            = "${var.bootstrap_root_volume_type}"
+  aws_instance_type               = "${var.bootstrap_instance_type}"
+  aws_associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
+
   tags = "${var.tags}"
 }
 
@@ -113,6 +119,11 @@ module "dcos-master-instances" {
 
   num_masters = "${var.num_masters}"
 
+  dcos_instance_os                = "${coalesce(var.masters_os,var.dcos_instance_os)}"
+  aws_root_volume_size            = "${var.masters_root_volume_size}"
+  aws_instance_type               = "${var.masters_instance_type}"
+  aws_associate_public_ip_address = "${var.masters_associate_public_ip_address}"
+
   tags = "${var.tags}"
 }
 
@@ -131,6 +142,12 @@ module "dcos-privateagent-instances" {
   aws_key_name           = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
 
   num_private_agents = "${var.num_private_agents}"
+
+  dcos_instance_os                = "${coalesce(var.private_agents_os,var.dcos_instance_os)}"
+  aws_root_volume_size            = "${var.private_agents_root_volume_size}"
+  aws_root_volume_type            = "${var.private_agents_root_volume_type}"
+  aws_instance_type               = "${var.private_agents_instance_type}"
+  aws_associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
 
   tags = "${var.tags}"
 }
@@ -152,6 +169,12 @@ module "dcos-publicagent-instances" {
   aws_key_name           = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
 
   num_public_agents = "${var.num_public_agents}"
+
+  dcos_instance_os                = "${coalesce(var.public_agents_os,var.dcos_instance_os)}"
+  aws_root_volume_size            = "${var.public_agents_root_volume_size}"
+  aws_root_volume_type            = "${var.public_agents_root_volume_type}"
+  aws_instance_type               = "${var.public_agents_instance_type}"
+  aws_associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
 
   tags = "${var.tags}"
 }
