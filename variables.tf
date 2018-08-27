@@ -73,7 +73,7 @@ variable "bootstrap_os" {
 
 variable "bootstrap_root_volume_size" {
   description = "[BOOTSTRAP] Root volume size"
-  default     = ""
+  default     = "80"
 }
 
 variable "bootstrap_root_volume_type" {
@@ -103,7 +103,7 @@ variable "masters_os" {
 
 variable "masters_root_volume_size" {
   description = "[MASTERS] Root volume size"
-  default     = ""
+  default     = "120"
 }
 
 variable "masters_instance_type" {
@@ -128,7 +128,7 @@ variable "private_agents_os" {
 
 variable "private_agents_root_volume_size" {
   description = "[PRIVATE AGENTS] Root volume size"
-  default     = ""
+  default     = "120"
 }
 
 variable "private_agents_root_volume_type" {
@@ -158,7 +158,7 @@ variable "public_agents_os" {
 
 variable "public_agents_root_volume_size" {
   description = "[PUBLIC AGENTS] Root volume size"
-  default     = ""
+  default     = "120"
 }
 
 variable "public_agents_root_volume_type" {
