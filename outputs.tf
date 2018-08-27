@@ -1,20 +1,20 @@
 output "bootstrap.instance" {
-  description = "Bottsrap instance ID"
+  description = "Bootstrap instance ID"
   value       = "${module.dcos-bootstrap-instance.instance}"
 }
 
 output "bootstrap.public_ip" {
-  description = "Bottsrap instance public ip"
+  description = "Bootstrap instance public ip"
   value       = "${module.dcos-bootstrap-instance.public_ip}"
 }
 
 output "bootstrap.private_ip" {
-  description = "Bottsrap instance private ip"
+  description = "Bootstrap instance private ip"
   value       = "${module.dcos-bootstrap-instance.private_ip}"
 }
 
 output "bootstrap.os_user" {
-  description = "Bottsrap instance OS default user"
+  description = "Bootstrap instance OS default user"
   value       = "${module.dcos-bootstrap-instance.os_user}"
 }
 
