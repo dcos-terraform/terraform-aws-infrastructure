@@ -62,7 +62,7 @@ variable "aws_ami" {
 }
 
 variable "bootstrap_aws_ami" {
-  description = "[MASTER] AMI to be used"
+  description = "[BOOTSTRAP] AMI to be used"
   default     = ""
 }
 
@@ -78,12 +78,12 @@ variable "bootstrap_root_volume_size" {
 
 variable "bootstrap_root_volume_type" {
   description = "[BOOTSTRAP] Specify the root volume type."
-  default     = ""
+  default     = "standard"
 }
 
 variable "bootstrap_instance_type" {
   description = "[BOOTSTRAP] Instance type"
-  default     = ""
+  default     = "t2.medium"
 }
 
 variable "bootstrap_associate_public_ip_address" {
@@ -108,7 +108,7 @@ variable "masters_root_volume_size" {
 
 variable "masters_instance_type" {
   description = "[MASTERS] Instance type"
-  default     = ""
+  default     = "m4.xlarge"
 }
 
 variable "masters_associate_public_ip_address" {
@@ -133,12 +133,12 @@ variable "private_agents_root_volume_size" {
 
 variable "private_agents_root_volume_type" {
   description = "[PRIVATE AGENTS] Specify the root volume type."
-  default     = ""
+  default     = "gp2"
 }
 
 variable "private_agents_instance_type" {
   description = "[PRIVATE AGENTS] Instance type"
-  default     = ""
+  default     = "m4.xlarge"
 }
 
 variable "private_agents_associate_public_ip_address" {
@@ -163,12 +163,12 @@ variable "public_agents_root_volume_size" {
 
 variable "public_agents_root_volume_type" {
   description = "[PUBLIC AGENTS] Specify the root volume type."
-  default     = ""
+  default     = "gp2"
 }
 
 variable "public_agents_instance_type" {
   description = "[PUBLIC AGENTS] Instance type"
-  default     = ""
+  default     = "m4.xlarge"
 }
 
 variable "public_agents_associate_public_ip_address" {
