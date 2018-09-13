@@ -46,12 +46,8 @@ provider "aws" {}
 // if availability zones is not set request the available in this region
 data "aws_availability_zones" "available" {}
 
-data "local_file" "public_key_file" {
-  filename = "${coalesce(var.ssh_public_key_file, "/dev/null")}"
-}
-
 locals {
-  ssh_key_content = "${coalesce(data.local_file.public_key_file.content, var.ssh_public_key)}"
+  ssh_key_content = "${var.ssh_public_key_file == "" ? var.ssh_public_key : file(var.ssh_public_key_file)}"
 }
 
 // create a ssh-key entry if ssh_public_key is set
