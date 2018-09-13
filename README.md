@@ -19,6 +19,21 @@ module "dcos-master-instances" {
 }
 ```
 
+Known Issues
+------------
+
+*Not subscribed to a marketplace AMI.*
+
+```
+* module.dcos-infrastructure.module.dcos-privateagent-instances.module.dcos-private-agent-instances.aws_instance.instance[0]: 1 error(s) occurred:
+* aws_instance.instance.0: Error launching source instance: OptInRequired: In order to use this AWS Marketplace product you need to accept terms and subscribe. To do so please visit https://aws.amazon.com/marketplace/pp?sku=ryg425ue2hwnsok9ccfastg4
+      status code: 401, request id: 421d7970-d19a-4178-9ee2-95995afe05da
+* module.dcos-infrastructure.module.dcos-privateagent-instances.module.dcos-private-agent-instances.aws_instance.instance[1]: 1 error(s) occurred:
+```
+
+Klick the stated link while being logged into the AWS Console ( Webinterface ) then click "subscribe" on the following page and follow the instructions.
+
+
 
 ## Inputs
 
@@ -56,7 +71,8 @@ module "dcos-master-instances" {
 | public_agents_os | [PUBLIC AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
 | public_agents_root_volume_size | [PUBLIC AGENTS] Root volume size | string | `120` | no |
 | public_agents_root_volume_type | [PUBLIC AGENTS] Specify the root volume type. | string | `gp2` | no |
-| ssh_public_key | SSH public key in authorized keys format (e.g. "ssh-rsa ..") to be used with the instances. Make sure you added this key to your ssh-agent | string | - | yes |
+| ssh_public_key | SSH public key in authorized keys format (e.g. "ssh-rsa ..") to be used with the instances. Make sure you added this key to your ssh-agent | string | `` | no |
+| ssh_public_key_file | path to SSH public key. This is mandatory but can be set to `""` if you want to use `ssh_public_key` with the key as string | string | - | yes |
 | subnet_range | Subnet used to spawn DC/OS in | string | `172.12.0.0/16` | no |
 | tags | Custom tags added to the resources created by this module | map | `<map>` | no |
 
@@ -66,6 +82,7 @@ module "dcos-master-instances" {
 |------|-------------|
 | bootstrap.instance | Bootstrap instance ID |
 | bootstrap.os_user | Bootstrap instance OS default user |
+| bootstrap.prereq-id | Returns the ID of the prereq script for bootstrap (if user_data or ami are not used) |
 | bootstrap.private_ip | Bootstrap instance private ip |
 | bootstrap.public_ip | Bootstrap instance public ip |
 | elb.masters_dns_name | This is the load balancer address to access the DC/OS UI |
@@ -73,14 +90,17 @@ module "dcos-master-instances" {
 | elb.public_agents_dns_name | DNS Name of the public agent load balancer. |
 | masters.instances | Master instances IDs |
 | masters.os_user | Master instances private OS default user |
+| masters.prereq-id | Returns the ID of the prereq script for masters (if user_data or ami are not used) |
 | masters.private_ips | Master instances private IPs |
 | masters.public_ips | Master instances public IPs |
 | private_agents.instances | Private Agent instances IDs |
 | private_agents.os_user | Private Agent instances private OS default user |
+| private_agents.prereq-id | Returns the ID of the prereq script for private agents (if user_data or ami are not used) |
 | private_agents.private_ips | Private Agent instances private IPs |
 | private_agents.public_ips | Private Agent public IPs |
 | public_agents.instances | Private Agent |
 | public_agents.os_user | Private Agent instances private OS default user |
+| public_agents.prereq-id | Returns the ID of the prereq script for public agents (if user_data or ami are not used) |
 | public_agents.private_ips | Private Agent instances private IPs |
 | public_agents.public_ips | Private Agent public IPs |
 

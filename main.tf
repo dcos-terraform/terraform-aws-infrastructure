@@ -19,6 +19,21 @@
  *   num_public_agents = "1"
  * }
  *```
+ *
+ * Known Issues
+ * ------------
+ *
+ * *Not subscribed to a marketplace AMI.*
+ *
+ *```
+ * * module.dcos-infrastructure.module.dcos-privateagent-instances.module.dcos-private-agent-instances.aws_instance.instance[0]: 1 error(s) occurred:
+ * * aws_instance.instance.0: Error launching source instance: OptInRequired: In order to use this AWS Marketplace product you need to accept terms and subscribe. To do so please visit https://aws.amazon.com/marketplace/pp?sku=ryg425ue2hwnsok9ccfastg4
+ *       status code: 401, request id: 421d7970-d19a-4178-9ee2-95995afe05da
+ * * module.dcos-infrastructure.module.dcos-privateagent-instances.module.dcos-private-agent-instances.aws_instance.instance[1]: 1 error(s) occurred:
+ *```
+ *
+ * Klick the stated link while being logged into the AWS Console ( Webinterface ) then click "subscribe" on the following page and follow the instructions.
+ *
  */
 
 // If admin ips is not set use our outbound ip.
@@ -31,11 +46,19 @@ provider "aws" {}
 // if availability zones is not set request the available in this region
 data "aws_availability_zones" "available" {}
 
+data "local_file" "public_key_file" {
+  filename = "${coalesce(var.ssh_public_key_file, "/dev/null")}"
+}
+
+locals {
+  ssh_key_content = "${coalesce(data.local_file.public_key_file.content, var.ssh_public_key)}"
+}
+
 // create a ssh-key entry if ssh_public_key is set
 resource "aws_key_pair" "deployer" {
-  count      = "${var.ssh_public_key == "none" ? 0 : 1}"
+  count      = "${local.ssh_key_content == "" ? 0 : 1}"
   key_name   = "${var.cluster_name}-deployer-key"
-  public_key = "${var.ssh_public_key}"
+  public_key = "${local.ssh_key_content}"
 }
 
 // Create a VPC and subnets
