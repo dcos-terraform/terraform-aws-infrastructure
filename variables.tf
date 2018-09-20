@@ -5,7 +5,6 @@ variable "dcos_instance_os" {
 
 variable "cluster_name" {
   description = "Name of the DC/OS cluster"
-  default     = "dcos-example"
 }
 
 variable "availability_zones" {
@@ -39,7 +38,8 @@ variable "ssh_public_key" {
   description = <<EOF
 SSH public key in authorized keys format (e.g. "ssh-rsa ..") to be used with the instances. Make sure you added this key to your ssh-agent
 EOF
-  default     = ""
+
+  default = ""
 }
 
 variable "ssh_public_key_file" {
