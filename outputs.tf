@@ -4,12 +4,12 @@ output "bootstrap.instance" {
 }
 
 output "bootstrap.public_ip" {
-  description = "Bootstrap instance public ip"
+  description = "Public IP of the bootstrap instance"
   value       = "${module.dcos-bootstrap-instance.public_ip}"
 }
 
 output "bootstrap.private_ip" {
-  description = "Bootstrap instance private ip"
+  description = "Private IP of the bootstrap instance"
   value       = "${module.dcos-bootstrap-instance.private_ip}"
 }
 
@@ -100,16 +100,16 @@ output "public_agents.prereq-id" {
 }
 
 output "elb.public_agents_dns_name" {
-  description = "DNS Name of the public agent load balancer."
+  description = "This is the load balancer to reach the public agents"
   value       = "${module.dcos-elb.public_agents_dns_name}"
 }
 
 output "elb.masters_dns_name" {
-  description = "This is the load balancer address to access the DC/OS UI"
+  description = "This is the load balancer to access the DC/OS UI"
   value       = "${module.dcos-elb.masters_dns_name}"
 }
 
 output "elb.masters_internal_dns_name" {
-  description = "This is the load balancer address to access the DC/OS UI"
+  description = "This is the load balancer to access the masters internally in the cluster"
   value       = "${module.dcos-elb.masters_internal_dns_name}"
 }
