@@ -36,11 +36,6 @@
  *
  */
 
-// If admin ips is not set use our outbound ip.
-data "http" "whatismyip" {
-  url = "http://whatismyip.akamai.com/"
-}
-
 provider "aws" {}
 
 // if availability zones is not set request the available in this region
@@ -84,7 +79,7 @@ module "dcos-security-groups" {
   vpc_id       = "${module.dcos-vpc.vpc_id}"
   subnet_range = "${var.subnet_range}"
   cluster_name = "${var.cluster_name}"
-  admin_ips    = ["${coalescelist(var.admin_ips, list("${data.http.whatismyip.body}/32"))}"]
+  admin_ips    = ["${var.admin_ips}"]
 }
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
