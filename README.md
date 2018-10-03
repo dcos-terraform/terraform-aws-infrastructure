@@ -1,4 +1,4 @@
-AWS DC/OS Master Instances
+AWS DC/OS Infrastructure
 ============
 This module creates typical DS/OS infrastructure in AWS.
 
@@ -6,8 +6,8 @@ EXAMPLE
 -------
 
 ```hcl
-module "dcos-master-instances" {
-  source  = "terraform-dcos/masters/aws"
+module "dcos-infrastructure" {
+  source  = "terraform-dcos/infrastructure/aws"
   version = "~> 0.1"
 
   cluster_name = "production"
