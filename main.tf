@@ -76,10 +76,11 @@ module "dcos-security-groups" {
     aws = "aws"
   }
 
-  vpc_id       = "${module.dcos-vpc.vpc_id}"
-  subnet_range = "${var.subnet_range}"
-  cluster_name = "${var.cluster_name}"
-  admin_ips    = ["${var.admin_ips}"]
+  vpc_id                         = "${module.dcos-vpc.vpc_id}"
+  subnet_range                   = "${var.subnet_range}"
+  cluster_name                   = "${var.cluster_name}"
+  admin_ips                      = ["${var.admin_ips}"]
+  public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
 }
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
