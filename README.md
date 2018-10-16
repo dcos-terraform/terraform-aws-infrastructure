@@ -1,4 +1,4 @@
-AWS DC/OS Infrastructure
+AWS DC/OS Master Instances
 ============
 This module creates typical DS/OS infrastructure in AWS.
 
@@ -6,8 +6,8 @@ EXAMPLE
 -------
 
 ```hcl
-module "dcos-infrastructure" {
-  source  = "terraform-dcos/infrastructure/aws"
+module "dcos-master-instances" {
+  source  = "terraform-dcos/masters/aws"
   version = "~> 0.1"
 
   cluster_name = "production"
@@ -39,7 +39,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| admin_ips | List of CIDR admin IPs | string | `<list>` | no |
+| admin_ips | List of CIDR admin IPs | list | - | yes |
 | availability_zones | Availability zones to be used | list | `<list>` | no |
 | aws_ami | AMI that will be used for the instances instead of Mesosphere provided AMIs | string | `` | no |
 | aws_key_name | Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key to none | string | `` | no |
@@ -65,6 +65,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | private_agents_os | [PRIVATE AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
 | private_agents_root_volume_size | [PRIVATE AGENTS] Root volume size in GB | string | `120` | no |
 | private_agents_root_volume_type | [PRIVATE AGENTS] Root volume type | string | `gp2` | no |
+| public_agents_additional_ports | List of additional ports on public agents (in addition to 80 and 443) | string | `<list>` | no |
 | public_agents_associate_public_ip_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `true` | no |
 | public_agents_aws_ami | [PUBLIC AGENTS] AMI to be used | string | `` | no |
 | public_agents_instance_type | [PUBLIC AGENTS] Instance type | string | `m4.xlarge` | no |
