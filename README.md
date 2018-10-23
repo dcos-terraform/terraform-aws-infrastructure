@@ -102,6 +102,6 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public_agents.instances | Private Agent |
 | public_agents.os_user | Private Agent instances private OS default user |
 | public_agents.prereq-id | Returns the ID of the prereq script for public agents (if user_data or ami are not used) |
-| public_agents.private_ips | Private Agent instances private IPs |
-| public_agents.public_ips | Private Agent public IPs |
+| public_agents.private_ips | Public Agent instances private IPs |
+| public_agents.public_ips | Public Agent public IPs |
 

@@ -80,12 +80,12 @@ output "public_agents.instances" {
 }
 
 output "public_agents.public_ips" {
-  description = "Private Agent public IPs"
+  description = "Public Agent public IPs"
   value       = ["${module.dcos-publicagent-instances.public_ips}"]
 }
 
 output "public_agents.private_ips" {
-  description = "Private Agent instances private IPs"
+  description = "Public Agent instances private IPs"
   value       = ["${module.dcos-publicagent-instances.private_ips}"]
 }
 
