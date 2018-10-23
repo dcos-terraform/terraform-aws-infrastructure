@@ -42,7 +42,8 @@ provider "aws" {}
 data "aws_availability_zones" "available" {}
 
 locals {
-  ssh_key_content = "${var.ssh_public_key_file == "" ? var.ssh_public_key : file(var.ssh_public_key_file)}"
+  ssh_public_key_file = "${var.ssh_public_key_file == "" ? format("%s/main.tf", path.module) : var.ssh_public_key_file}"
+  ssh_key_content     = "${var.ssh_public_key_file == "" ? var.ssh_public_key : file(local.ssh_public_key_file)}"
 }
 
 // create a ssh-key entry if ssh_public_key is set
