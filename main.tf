@@ -184,7 +184,6 @@ module "dcos-publicagent-instances" {
 
   aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
   aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
-  tags                   = "${var.tags}"
   aws_key_name           = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
 
   num_public_agents = "${var.num_public_agents}"
