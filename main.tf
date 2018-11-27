@@ -155,9 +155,9 @@ module "dcos-privateagent-instances" {
 
   cluster_name = "${var.cluster_name}"
 
-  aws_subnet_ids                = ["${module.dcos-vpc.subnet_ids}"]
-  security_groups_public_agents = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
-  aws_key_name                  = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
+  aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
+  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  aws_key_name           = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
 
   num_private_agents = "${var.num_private_agents}"
 
@@ -183,7 +183,7 @@ module "dcos-publicagent-instances" {
   cluster_name = "${var.cluster_name}"
 
   aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
-  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
   tags                   = "${var.tags}"
   aws_key_name           = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
 
