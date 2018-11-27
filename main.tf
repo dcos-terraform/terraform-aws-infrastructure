@@ -36,6 +36,15 @@
  *
  */
 
+data "null_data_source" "lb_rules" {
+  count = "${length(var.public_agents_additional_ports)}"
+
+  inputs = {
+    port     = "${element(var.public_agents_additional_ports, count.index)}"
+    protocol = "tcp"
+  }
+}
+
 provider "aws" {}
 
 // if availability zones is not set request the available in this region
@@ -201,21 +210,22 @@ module "dcos-publicagent-instances" {
 
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.
 module "dcos-elb" {
-  source  = "dcos-terraform/elb-dcos/aws"
+  source  = "dcos-terraform/lb-dcos/aws"
   version = "~> 0.1"
 
   providers = {
     aws = "aws"
   }
 
-  cluster_name = "${var.cluster_name}"
-  subnet_ids   = ["${module.dcos-vpc.subnet_ids}"]
-
-  security_groups_masters          = ["${list(module.dcos-security-groups.admin,module.dcos-security-groups.internal)}"]
-  security_groups_masters_internal = ["${list(module.dcos-security-groups.internal)}"]
-  security_groups_public_agents    = ["${list(module.dcos-security-groups.admin,module.dcos-security-groups.internal)}"]
-  master_instances                 = ["${module.dcos-master-instances.instances}"]
-  public_agent_instances           = ["${module.dcos-publicagent-instances.instances}"]
-
-  tags = "${var.tags}"
+  cluster_name                       = "${var.cluster_name}"
+  subnet_ids                         = ["${module.dcos-vpc.subnet_ids}"]
+  security_groups_masters            = ["${list(module.dcos-security-groups.admin,module.dcos-security-groups.internal)}"]
+  security_groups_masters_internal   = ["${list(module.dcos-security-groups.internal)}"]
+  aws_security_group_ids             = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  master_instances                   = ["${module.dcos-master-instances.instances}"]
+  num_masters                        = "${var.num_masters}"
+  num_public_agents                  = "${var.num_public_agents}"
+  public_agent_instances             = ["${module.dcos-publicagent-instances.instances}"]
+  public_agents_additional_listeners = ["${data.null_data_source.lb_rules.*.outputs}"]
+  tags                               = "${var.tags}"
 }
