@@ -42,7 +42,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | admin_ips | List of CIDR admin IPs | list | - | yes |
 | availability_zones | Availability zones to be used | list | `<list>` | no |
 | aws_ami | AMI that will be used for the instances instead of Mesosphere provided AMIs | string | `` | no |
-| aws_key_name | Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key to none | string | `` | no |
+| aws_key_name | Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key_file to empty string | string | `` | no |
 | bootstrap_associate_public_ip_address | [BOOTSTRAP] Associate a public ip address with there instances | string | `true` | no |
 | bootstrap_aws_ami | [BOOTSTRAP] AMI to be used | string | `` | no |
 | bootstrap_instance_type | [BOOTSTRAP] Instance type | string | `t2.medium` | no |
