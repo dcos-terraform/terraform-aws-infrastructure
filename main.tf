@@ -155,9 +155,9 @@ module "dcos-privateagent-instances" {
 
   cluster_name = "${var.cluster_name}"
 
-  aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
-  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
-  aws_key_name           = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
+  aws_subnet_ids                = ["${module.dcos-vpc.subnet_ids}"]
+  security_groups_public_agents = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
+  aws_key_name                  = "${var.ssh_public_key == "none" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
 
   num_private_agents = "${var.num_private_agents}"
 
@@ -213,7 +213,7 @@ module "dcos-elb" {
 
   security_groups_masters          = ["${list(module.dcos-security-groups.admin,module.dcos-security-groups.internal)}"]
   security_groups_masters_internal = ["${list(module.dcos-security-groups.internal)}"]
-  security_groups_public_agents    = ["${list(module.dcos-security-groups.admin,module.dcos-security-groups.internal)}"]
+  security_groups_public_agents    = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
   master_instances                 = ["${module.dcos-master-instances.instances}"]
   public_agent_instances           = ["${module.dcos-publicagent-instances.instances}"]
 
