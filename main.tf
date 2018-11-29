@@ -114,6 +114,7 @@ module "dcos-bootstrap-instance" {
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.bootstrap_root_volume_size}"
   aws_root_volume_type            = "${var.bootstrap_root_volume_type}"
+  aws_iam_instance_profile        = "${var.bootstrap_iam_instance_profile}"
   aws_instance_type               = "${var.bootstrap_instance_type}"
   aws_associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
 
@@ -139,6 +140,7 @@ module "dcos-master-instances" {
   dcos_instance_os                = "${coalesce(var.masters_os,var.dcos_instance_os)}"
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.masters_root_volume_size}"
+  aws_iam_instance_profile        = "${coalesce(var.masters_iam_instance_profile, module.dcos-iam.aws_master_profile)}"
   aws_instance_type               = "${var.masters_instance_type}"
   aws_associate_public_ip_address = "${var.masters_associate_public_ip_address}"
 
@@ -165,6 +167,7 @@ module "dcos-privateagent-instances" {
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.private_agents_root_volume_size}"
   aws_root_volume_type            = "${var.private_agents_root_volume_type}"
+  aws_iam_instance_profile        = "${coalesce(var.private_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.private_agents_instance_type}"
   aws_associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
 
@@ -193,6 +196,7 @@ module "dcos-publicagent-instances" {
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.public_agents_root_volume_size}"
   aws_root_volume_type            = "${var.public_agents_root_volume_type}"
+  aws_iam_instance_profile        = "${coalesce(var.public_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.public_agents_instance_type}"
   aws_associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
 

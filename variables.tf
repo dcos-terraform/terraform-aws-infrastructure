@@ -84,6 +84,11 @@ variable "bootstrap_root_volume_type" {
   default     = "standard"
 }
 
+variable "bootstrap_iam_instance_profile" {
+  description = "[BOOTSTRAP] Instance profile to be used for these instances"
+  default     = ""
+}
+
 variable "bootstrap_instance_type" {
   description = "[BOOTSTRAP] Instance type"
   default     = "t2.medium"
@@ -107,6 +112,11 @@ variable "masters_os" {
 variable "masters_root_volume_size" {
   description = "[MASTERS] Root volume size in GB"
   default     = "120"
+}
+
+variable "masters_iam_instance_profile" {
+  description = "[MASTERS] Instance profile to be used for these instances"
+  default     = ""
 }
 
 variable "masters_instance_type" {
@@ -139,6 +149,11 @@ variable "private_agents_root_volume_type" {
   default     = "gp2"
 }
 
+variable "private_agents_iam_instance_profile" {
+  description = "[PRIVATE AGENTS] Instance profile to be used for these instances"
+  default     = ""
+}
+
 variable "private_agents_instance_type" {
   description = "[PRIVATE AGENTS] Instance type"
   default     = "m4.xlarge"
@@ -167,6 +182,11 @@ variable "public_agents_root_volume_size" {
 variable "public_agents_root_volume_type" {
   description = "[PUBLIC AGENTS] Specify the root volume type."
   default     = "gp2"
+}
+
+variable "public_agents_iam_instance_profile" {
+  description = "[PUBLIC AGENTS] Instance profile to be used for these instances"
+  default     = ""
 }
 
 variable "public_agents_instance_type" {
