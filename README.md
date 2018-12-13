@@ -8,7 +8,7 @@ EXAMPLE
 ```hcl
 module "dcos-master-instances" {
   source  = "terraform-dcos/masters/aws"
-  version = "~> 0.1"
+  version = "~> 0.1.0"
 
   cluster_name = "production"
   ssh_public_key = "ssh-rsa ..."
