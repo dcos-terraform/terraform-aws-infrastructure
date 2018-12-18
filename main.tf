@@ -98,7 +98,7 @@ module "dcos-iam" {
 
 module "dcos-bootstrap-instance" {
   source  = "github.com/dcos-terraform/terraform-aws-bootstrap?ref=conditional-bootstrap"
-  version = "~> 0.1"
+  #version = "~> 0.1"
 
   providers = {
     aws = "aws"
