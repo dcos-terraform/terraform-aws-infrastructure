@@ -113,3 +113,8 @@ output "elb.masters_internal_dns_name" {
   description = "This is the load balancer to access the masters internally in the cluster"
   value       = "${module.dcos-elb.masters_internal_dns_name}"
 }
+
+output "vpc.id" {
+  description = "This is the id of the VPC the cluster is in"
+  value       = "${module.dcos-vpc.vpc_id}"
+}
