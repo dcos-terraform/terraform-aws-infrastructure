@@ -58,7 +58,6 @@ module "dcos-vpc" {
   source  = "dcos-terraform/vpc/aws"
   version = "~> 0.1"
 
-  # version = "0.0.1"
   providers = {
     aws = "aws"
   }
@@ -108,7 +107,8 @@ module "dcos-bootstrap-instance" {
   aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
   aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
   aws_key_name           = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
-  num_bootstrap = "${var.num_bootstrap}"
+
+  num_bootstrap                   = "${var.num_bootstrap}"
   dcos_instance_os                = "${coalesce(var.bootstrap_os,var.dcos_instance_os)}"
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.bootstrap_root_volume_size}"
