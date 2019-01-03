@@ -55,8 +55,9 @@ resource "aws_key_pair" "deployer" {
 
 // Create a VPC and subnets
 module "dcos-vpc" {
-  source  = "dcos-terraform/vpc/aws"
-  version = "~> 0.1"
+  source  = "github.com/dcos-terraform/terraform-aws-vpc?ref=multi-region"
+  #source  = "dcos-terraform/vpc/aws"
+  #version = "~> 0.1"
 
   providers = {
     aws = "aws"
