@@ -110,7 +110,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public_agents.private_ips | Public Agent instances private IPs |
 | public_agents.public_ips | Public Agent public IPs |
 | security_group.internal_id | This is the id of the internal security_group that the cluster is in |
-| vpc.cidr_block | This is the id of the VPC the cluster is in |
+| vpc.cidr_block | This is the cidr_block of the VPC the cluster is in |
 | vpc.id | This is the id of the VPC the cluster is in |
 | vpc.main_route_table_id | This is the id of the VPC's main routing table the cluster is in |
 
