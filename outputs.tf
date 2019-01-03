@@ -118,3 +118,18 @@ output "vpc.id" {
   description = "This is the id of the VPC the cluster is in"
   value       = "${module.dcos-vpc.vpc_id}"
 }
+
+output "vpc.cidr_block" {
+  description = "This is the id of the VPC the cluster is in"
+  value       = "${module.dcos-vpc.vpc_id}"
+}
+
+output "vpc.main_route_table_id" {
+  description = "This is the id of the VPC's main routing table the cluster is in"
+  value       = "${module.dcos-vpc.aws_main_route_table_id}"
+}
+
+output "security_group.internal_id" {
+  description = "This is the id of the internal security_group that the cluster is in"
+  value       = "${module.dcos-security-groups.internal}"
+}
