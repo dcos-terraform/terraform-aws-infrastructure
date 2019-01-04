@@ -86,8 +86,7 @@ module "dcos-security-groups" {
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
 module "dcos-iam" {
-  #source  = "dcos-terraform/iam/aws"
-  source  = "git::https://github.com/dcos-terraform/terraform-aws-iam?ref=dynam-masters-poc"
+  source  = "dcos-terraform/iam/aws"
   version = "~> 0.1.0"
 
   providers = {
