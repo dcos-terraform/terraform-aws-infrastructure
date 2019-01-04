@@ -93,7 +93,17 @@ module "dcos-iam" {
     aws = "aws"
   }
 
-  cluster_name = "${var.cluster_name}"
+  cluster_name  = "${var.cluster_name}"
+  aws_s3_bucket = "${var.aws_s3_bucket}"
+}
+
+// If External Exhibitor is Specified, Create the Bucket
+resource "aws_s3_bucket" "external_exhibitor" {
+  count  = "${var.aws_s3_bucket != "" ? 1 : 0}"
+  bucket = "${var.aws_s3_bucket}"
+  acl    = "private"
+
+  tags = "${var.tags}"
 }
 
 module "dcos-bootstrap-instance" {
