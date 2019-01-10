@@ -109,4 +109,5 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public_agents.prereq-id | Returns the ID of the prereq script for public agents (if user_data or ami are not used) |
 | public_agents.private_ips | Public Agent instances private IPs |
 | public_agents.public_ips | Public Agent public IPs |
+| vpc.id | This is the id of the VPC the cluster is in |
 
