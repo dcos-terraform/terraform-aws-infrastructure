@@ -55,9 +55,8 @@ resource "aws_key_pair" "deployer" {
 
 // Create a VPC and subnets
 module "dcos-vpc" {
-  source  = "github.com/dcos-terraform/terraform-aws-vpc?ref=multi-region"
-  #source  = "dcos-terraform/vpc/aws"
-  #version = "~> 0.1"
+  source  = "dcos-terraform/vpc/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -70,10 +69,9 @@ module "dcos-vpc" {
 
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
-  source = "github.com/dcos-terraform/terraform-aws-security-groups?ref=multi-region"
-  #source = "dcos-terraform/security-groups/aws"
+  source = "dcos-terraform/security-groups/aws"
+   version = "0.1.0"
 
-  # version = "0.0.1"
   providers = {
     aws = "aws"
   }
@@ -88,7 +86,7 @@ module "dcos-security-groups" {
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
 module "dcos-iam" {
   source  = "dcos-terraform/iam/aws"
-  version = "~> 0.1"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -98,9 +96,8 @@ module "dcos-iam" {
 }
 
 module "dcos-bootstrap-instance" {
-  source = "github.com/dcos-terraform/terraform-aws-bootstrap?ref=conditional-bootstrap"
-
-  #version = "~> 0.1"
+  source = "dcos-terraform/bootstrap/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -123,7 +120,7 @@ module "dcos-bootstrap-instance" {
 
 module "dcos-master-instances" {
   source  = "dcos-terraform/masters/aws"
-  version = "~> 0.1"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -149,7 +146,7 @@ module "dcos-master-instances" {
 
 module "dcos-privateagent-instances" {
   source  = "dcos-terraform/private-agents/aws"
-  version = "~> 0.1"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -177,7 +174,7 @@ module "dcos-privateagent-instances" {
 // DC/OS tested OSes provides sample AMIs and user-data
 module "dcos-publicagent-instances" {
   source  = "dcos-terraform/public-agents/aws"
-  version = "~> 0.1"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -206,7 +203,7 @@ module "dcos-publicagent-instances" {
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.
 module "dcos-elb" {
   source  = "dcos-terraform/elb-dcos/aws"
-  version = "~> 0.1"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
