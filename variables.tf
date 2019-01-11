@@ -208,3 +208,8 @@ variable "public_agents_additional_ports" {
   description = "List of additional ports allowed for public access on public agents (80 and 443 open by default)"
   default     = []
 }
+
+variable "aws_s3_bucket" {
+  description = "S3 Bucket for External Exhibitor"
+  default     = ""
+}
