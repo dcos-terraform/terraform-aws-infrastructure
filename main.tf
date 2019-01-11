@@ -69,8 +69,8 @@ module "dcos-vpc" {
 
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
-  source = "dcos-terraform/security-groups/aws"
-   version = "0.1.0"
+  source  = "dcos-terraform/security-groups/aws"
+  version = "0.1.0"
 
   providers = {
     aws = "aws"
@@ -96,13 +96,14 @@ module "dcos-iam" {
 }
 
 module "dcos-bootstrap-instance" {
-  source = "dcos-terraform/bootstrap/aws"
+  source  = "dcos-terraform/bootstrap/aws"
   version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
-  cluster_name = "${var.cluster_name}"
+
+  cluster_name           = "${var.cluster_name}"
   aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
   aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
   aws_key_name           = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
@@ -115,7 +116,7 @@ module "dcos-bootstrap-instance" {
   aws_iam_instance_profile        = "${var.bootstrap_iam_instance_profile}"
   aws_instance_type               = "${var.bootstrap_instance_type}"
   aws_associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
-  tags = "${var.tags}"
+  tags                            = "${var.tags}"
 }
 
 module "dcos-master-instances" {
