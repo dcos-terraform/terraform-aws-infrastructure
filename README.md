@@ -59,6 +59,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | masters_instance_type | [MASTERS] Instance type | string | `m4.xlarge` | no |
 | masters_os | [MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
 | masters_root_volume_size | [MASTERS] Root volume size in GB | string | `120` | no |
+| num_bootstrap | Specify the amount of bootstrap. You should have at most 1 | string | `1` | no |
 | num_masters | Specify the amount of masters. For redundancy you should have at least 3 | string | `3` | no |
 | num_private_agents | Specify the amount of private agents. These agents will provide your main resources | string | `2` | no |
 | num_public_agents | Specify the amount of public agents. These agents will host marathon-lb and edgelb | string | `1` | no |
@@ -109,5 +110,8 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public_agents.prereq-id | Returns the ID of the prereq script for public agents (if user_data or ami are not used) |
 | public_agents.private_ips | Public Agent instances private IPs |
 | public_agents.public_ips | Public Agent public IPs |
+| security_group.internal_id | This is the id of the internal security_group that the cluster is in |
+| vpc.cidr_block | This is the cidr_block of the VPC the cluster is in |
 | vpc.id | This is the id of the VPC the cluster is in |
+| vpc.main_route_table_id | This is the id of the VPC's main routing table the cluster is in |
 

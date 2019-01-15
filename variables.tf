@@ -44,6 +44,11 @@ variable "ssh_public_key_file" {
   description = "Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string."
 }
 
+variable "num_bootstrap" {
+  description = "Specify the amount of bootstrap. You should have at most 1"
+  default     = 1
+}
+
 variable "num_masters" {
   description = "Specify the amount of masters. For redundancy you should have at least 3"
   default     = 3
