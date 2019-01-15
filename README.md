@@ -114,3 +114,4 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | vpc.cidr_block | This is the cidr_block of the VPC the cluster is in |
 | vpc.id | This is the id of the VPC the cluster is in |
 | vpc.main_route_table_id | This is the id of the VPC's main routing table the cluster is in |
+
