@@ -55,8 +55,8 @@ resource "aws_key_pair" "deployer" {
 
 // Create a VPC and subnets
 module "dcos-vpc" {
-  source  = "dcos-terraform/vpc/aws"
-  version = "~> 0.1.0"
+  source  = "github.com/dcos-terraform/terraform-aws-vpc?ref=multi-region"
+ # version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -69,8 +69,8 @@ module "dcos-vpc" {
 
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
-  source  = "dcos-terraform/security-groups/aws"
-  version = "0.1.0"
+  source  = "github.com/dcos-terraform/terraform-aws-security-groups?ref=multi-region"
+ # version = "0.1.0"
 
   providers = {
     aws = "aws"
@@ -106,8 +106,8 @@ resource "aws_s3_bucket" "external_exhibitor" {
 }
 
 module "dcos-bootstrap-instance" {
-  source  = "dcos-terraform/bootstrap/aws"
-  version = "~> 0.1.0"
+  source  = "github.com/dcos-terraform/terraform-aws-bootstrap?ref=conditional-bootstrap"
+ # version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
