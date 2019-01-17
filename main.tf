@@ -70,7 +70,7 @@ module "dcos-vpc" {
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
   source  = "dcos-terraform/security-groups/aws"
-  version = "0.1.0"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
