@@ -17,6 +17,14 @@ module "dcos-infrastructure" {
   num_private_agents = "2"
   num_public_agents = "1"
 }
+
+output "bootstrap-public-ip" {
+  value = "${module.dcos-infrastructure.bootstrap.public_ip}"
+}
+
+output "masters-public-ips" {
+  value = "${module.dcos-infrastructure.masters.public_ips}"
+}
 ```
 
 Known Issues
