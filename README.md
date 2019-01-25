@@ -6,8 +6,8 @@ EXAMPLE
 -------
 
 ```hcl
-module "dcos-master-instances" {
-  source  = "terraform-dcos/masters/aws"
+module "dcos-infrastructure" {
+  source  = "dcos-terraform/infrastructure/aws"
   version = "~> 0.1.0"
 
   cluster_name = "production"
@@ -16,6 +16,14 @@ module "dcos-master-instances" {
   num_masters = "3"
   num_private_agents = "2"
   num_public_agents = "1"
+}
+
+output "bootstrap-public-ip" {
+  value = "${module.dcos-infrastructure.bootstrap.public_ip}"
+}
+
+output "masters-public-ips" {
+  value = "${module.dcos-infrastructure.masters.public_ips}"
 }
 ```
 
@@ -70,7 +78,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | private_agents_os | [PRIVATE AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
 | private_agents_root_volume_size | [PRIVATE AGENTS] Root volume size in GB | string | `120` | no |
 | private_agents_root_volume_type | [PRIVATE AGENTS] Root volume type | string | `gp2` | no |
-| public_agents_additional_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | string | `<list>` | no |
+| public_agents_additional_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | list | `<list>` | no |
 | public_agents_associate_public_ip_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `true` | no |
 | public_agents_aws_ami | [PUBLIC AGENTS] AMI to be used | string | `` | no |
 | public_agents_iam_instance_profile | [PUBLIC AGENTS] Instance profile to be used for these instances | string | `` | no |
@@ -105,7 +113,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | private_agents.prereq-id | Returns the ID of the prereq script for private agents (if user_data or ami are not used) |
 | private_agents.private_ips | Private Agent instances private IPs |
 | private_agents.public_ips | Private Agent public IPs |
-| public_agents.instances | Private Agent |
+| public_agents.instances | Public Agent instances IDs |
 | public_agents.os_user | Private Agent instances private OS default user |
 | public_agents.prereq-id | Returns the ID of the prereq script for public agents (if user_data or ami are not used) |
 | public_agents.private_ips | Public Agent instances private IPs |

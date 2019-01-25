@@ -7,8 +7,8 @@
  * -------
  *
  *```hcl
- * module "dcos-master-instances" {
- *   source  = "terraform-dcos/masters/aws"
+ * module "dcos-infrastructure" {
+ *   source  = "dcos-terraform/infrastructure/aws"
  *   version = "~> 0.1.0"
  *
  *   cluster_name = "production"
@@ -17,6 +17,14 @@
  *   num_masters = "3"
  *   num_private_agents = "2"
  *   num_public_agents = "1"
+ * }
+ *
+ * output "bootstrap-public-ip" {
+ *   value = "${module.dcos-infrastructure.bootstrap.public_ip}"
+ * }
+ *
+ * output "masters-public-ips" {
+ *   value = "${module.dcos-infrastructure.masters.public_ips}"
  * }
  *```
  *
