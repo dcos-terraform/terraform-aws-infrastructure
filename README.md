@@ -75,15 +75,13 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | num_public_agents | Specify the amount of public agents. These agents will host marathon-lb and edgelb | string | `1` | no |
 | private_agents_associate_public_ip_address | [PRIVATE AGENTS] Associate a public ip address with there instances | string | `true` | no |
 | private_agents_aws_ami | [PRIVATE AGENTS] AMI to be used | string | `` | no |
+| private_agents_extra_volumes | [PRIVATE AGENTS] Extra volumes for each private agent | string | `<list>` | no |
 | private_agents_hostname_format | [PRIVATE AGENTS] Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-privateagent%[1]d-%[2]s` | no |
 | private_agents_iam_instance_profile | [PRIVATE AGENTS] Instance profile to be used for these instances | string | `` | no |
 | private_agents_instance_type | [PRIVATE AGENTS] Instance type | string | `m4.xlarge` | no |
 | private_agents_os | [PRIVATE AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
 | private_agents_root_volume_size | [PRIVATE AGENTS] Root volume size in GB | string | `120` | no |
 | private_agents_root_volume_type | [PRIVATE AGENTS] Root volume type | string | `gp2` | no |
-| public_agents_additional_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | string | `<list>` | no |
-| public_agents_associate_public_ip_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `true` | no |
-| public_agents_aws_ami | [PUBLIC AGENTS] AMI to be used | string | `` | no |
 | public_agents_access_ips | List of ips allowed access to public agents. admin_ips are joined to this list | list | `<list>` | no |
 | public_agents_additional_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | string | `<list>` | no |
 | public_agents_associate_public_ip_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `true` | no |
