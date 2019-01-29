@@ -154,6 +154,11 @@ variable "private_agents_root_volume_type" {
   default     = "gp2"
 }
 
+variable "private_agents_extra_volumes" {
+  description = "[PRIVATE AGENTS] Extra volumes for each private agent"
+  default     = []
+}
+
 variable "private_agents_iam_instance_profile" {
   description = "[PRIVATE AGENTS] Instance profile to be used for these instances"
   default     = ""
