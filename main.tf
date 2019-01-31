@@ -55,13 +55,13 @@ resource "aws_key_pair" "deployer" {
 
 // Create a VPC and subnets
 module "dcos-vpc" {
-  source  = "github.com/dcos-terraform/terraform-aws-vpc?ref=multi-region"
- # version = "~> 0.1.0"
+  source = "github.com/dcos-terraform/terraform-aws-vpc?ref=multi-region"
+
+  # version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
-
   subnet_range       = "${var.subnet_range}"
   cluster_name       = "${var.cluster_name}"
   availability_zones = ["${coalescelist(var.availability_zones, data.aws_availability_zones.available.names)}"]
@@ -69,13 +69,13 @@ module "dcos-vpc" {
 
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
-  source  = "github.com/dcos-terraform/terraform-aws-security-groups?ref=multi-region"
- # version = "0.1.0"
+  source = "github.com/dcos-terraform/terraform-aws-security-groups?ref=multi-region"
+
+  # version = "0.1.0"
 
   providers = {
     aws = "aws"
   }
-
   vpc_id                         = "${module.dcos-vpc.vpc_id}"
   subnet_range                   = "${var.subnet_range}"
   cluster_name                   = "${var.cluster_name}"
@@ -85,7 +85,8 @@ module "dcos-security-groups" {
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
 module "dcos-iam" {
-  source  = "dcos-terraform/iam/aws"
+  #source  = "dcos-terraform/iam/aws"
+  source  = "../terraform-aws-iam"
   version = "~> 0.1.0"
 
   providers = {
@@ -94,6 +95,7 @@ module "dcos-iam" {
 
   cluster_name  = "${var.cluster_name}"
   aws_s3_bucket = "${var.aws_s3_bucket}"
+  name_prefix   = "${var.name_prefix}"
 }
 
 // If External Exhibitor is Specified, Create the Bucket
@@ -106,18 +108,18 @@ resource "aws_s3_bucket" "external_exhibitor" {
 }
 
 module "dcos-bootstrap-instance" {
-  source  = "github.com/dcos-terraform/terraform-aws-bootstrap?ref=conditional-bootstrap"
- # version = "~> 0.1.0"
+  #source  = "github.com/dcos-terraform/terraform-aws-bootstrap?ref=conditional-bootstrap"
+  source = "../terraform-aws-bootstrap"
+
+  # version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
-
-  cluster_name           = "${var.cluster_name}"
-  aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
-  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
-  aws_key_name           = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
-
+  cluster_name                    = "${var.cluster_name}"
+  aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
+  aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  aws_key_name                    = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
   num_bootstrap                   = "${var.num_bootstrap}"
   dcos_instance_os                = "${coalesce(var.bootstrap_os,var.dcos_instance_os)}"
   aws_ami                         = "${var.aws_ami}"
@@ -126,51 +128,47 @@ module "dcos-bootstrap-instance" {
   aws_iam_instance_profile        = "${var.bootstrap_iam_instance_profile}"
   aws_instance_type               = "${var.bootstrap_instance_type}"
   aws_associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
+  name_prefix                     = "${var.name_prefix}"
   tags                            = "${var.tags}"
 }
 
 module "dcos-master-instances" {
-  source  = "dcos-terraform/masters/aws"
-  version = "~> 0.1.0"
+  #source  = "dcos-terraform/masters/aws"
+  source = "../terraform-aws-masters"
+
+  #version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
-
-  cluster_name = "${var.cluster_name}"
-
-  aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
-  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
-  aws_key_name           = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
-
-  num_masters = "${var.num_masters}"
-
+  cluster_name                    = "${var.cluster_name}"
+  aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
+  aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  aws_key_name                    = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
+  num_masters                     = "${var.num_masters}"
   dcos_instance_os                = "${coalesce(var.masters_os,var.dcos_instance_os)}"
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.masters_root_volume_size}"
   aws_iam_instance_profile        = "${coalesce(var.masters_iam_instance_profile, module.dcos-iam.aws_master_profile)}"
   aws_instance_type               = "${var.masters_instance_type}"
   aws_associate_public_ip_address = "${var.masters_associate_public_ip_address}"
-
-  tags = "${var.tags}"
+  tags                            = "${var.tags}"
 }
 
 module "dcos-privateagent-instances" {
-  source  = "dcos-terraform/private-agents/aws"
-  version = "~> 0.1.0"
+  #source  = "dcos-terraform/private-agents/aws"
+  source = "../terraform-aws-private-agents"
+
+  #version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
-
-  cluster_name = "${var.cluster_name}"
-
-  aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
-  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
-  aws_key_name           = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
-
-  num_private_agents = "${var.num_private_agents}"
-
+  cluster_name                    = "${var.cluster_name}"
+  aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
+  aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  aws_key_name                    = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
+  num_private_agents              = "${var.num_private_agents}"
   dcos_instance_os                = "${coalesce(var.private_agents_os,var.dcos_instance_os)}"
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.private_agents_root_volume_size}"
@@ -178,28 +176,26 @@ module "dcos-privateagent-instances" {
   aws_iam_instance_profile        = "${coalesce(var.private_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.private_agents_instance_type}"
   aws_associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
-
-  tags = "${var.tags}"
+  name_prefix                     = "${var.name_prefix}"
+  tags                            = "${var.tags}"
 }
 
 // DC/OS tested OSes provides sample AMIs and user-data
 module "dcos-publicagent-instances" {
-  source  = "dcos-terraform/public-agents/aws"
-  version = "~> 0.1.0"
+  #source  = "dcos-terraform/public-agents/aws"
+  source = "../terraform-aws-public-agents"
+
+  #version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
-
-  cluster_name = "${var.cluster_name}"
-
-  aws_subnet_ids         = ["${module.dcos-vpc.subnet_ids}"]
-  aws_security_group_ids = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
-  tags                   = "${var.tags}"
-  aws_key_name           = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
-
-  num_public_agents = "${var.num_public_agents}"
-
+  cluster_name                    = "${var.cluster_name}"
+  aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
+  aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
+  tags                            = "${var.tags}"
+  aws_key_name                    = "${local.ssh_key_content == "" ? var.aws_key_name : element(coalescelist(aws_key_pair.deployer.*.key_name, list("")), 0)}"
+  num_public_agents               = "${var.num_public_agents}"
   dcos_instance_os                = "${coalesce(var.public_agents_os,var.dcos_instance_os)}"
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.public_agents_root_volume_size}"
@@ -207,8 +203,8 @@ module "dcos-publicagent-instances" {
   aws_iam_instance_profile        = "${coalesce(var.public_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.public_agents_instance_type}"
   aws_associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
-
-  tags = "${var.tags}"
+  name_prefix                     = "${var.name_prefix}"
+  tags                            = "${var.tags}"
 }
 
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.
