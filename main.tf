@@ -88,6 +88,7 @@ module "dcos-security-groups" {
   subnet_range                   = "${var.subnet_range}"
   cluster_name                   = "${var.cluster_name}"
   admin_ips                      = ["${var.admin_ips}"]
+  public_agents_access_ips       = ["${var.public_agents_access_ips}"]
   public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
 }
 
