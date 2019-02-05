@@ -85,8 +85,7 @@ module "dcos-security-groups" {
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
 module "dcos-iam" {
-  #source  = "dcos-terraform/iam/aws"
-  source  = "../terraform-aws-iam"
+  source  = "dcos-terraform/iam/aws"
   version = "~> 0.1.0"
 
   providers = {
@@ -108,14 +107,13 @@ resource "aws_s3_bucket" "external_exhibitor" {
 }
 
 module "dcos-bootstrap-instance" {
-  #source  = "github.com/dcos-terraform/terraform-aws-bootstrap?ref=conditional-bootstrap"
-  source = "../terraform-aws-bootstrap"
-
-  # version = "~> 0.1.0"
+  source  = "dcos-terraform/bootstrap/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
+
   cluster_name                    = "${var.cluster_name}"
   aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
   aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
@@ -133,14 +131,13 @@ module "dcos-bootstrap-instance" {
 }
 
 module "dcos-master-instances" {
-  #source  = "dcos-terraform/masters/aws"
-  source = "../terraform-aws-masters"
-
-  #version = "~> 0.1.0"
+  source  = "dcos-terraform/masters/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
+
   cluster_name                    = "${var.cluster_name}"
   aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
   aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
@@ -156,14 +153,13 @@ module "dcos-master-instances" {
 }
 
 module "dcos-privateagent-instances" {
-  #source  = "dcos-terraform/private-agents/aws"
-  source = "../terraform-aws-private-agents"
-
-  #version = "~> 0.1.0"
+  source  = "dcos-terraform/private-agents/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
+
   cluster_name                    = "${var.cluster_name}"
   aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
   aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
@@ -182,14 +178,13 @@ module "dcos-privateagent-instances" {
 
 // DC/OS tested OSes provides sample AMIs and user-data
 module "dcos-publicagent-instances" {
-  #source  = "dcos-terraform/public-agents/aws"
-  source = "../terraform-aws-public-agents"
-
-  #version = "~> 0.1.0"
+  source  = "dcos-terraform/public-agents/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
+
   cluster_name                    = "${var.cluster_name}"
   aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
   aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.public_agents)}"]
