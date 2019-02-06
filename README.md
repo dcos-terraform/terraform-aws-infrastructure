@@ -53,7 +53,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | bootstrap_root_volume_type | [BOOTSTRAP] Root volume type | string | `standard` | no |
 | cluster_name | Name of the DC/OS cluster | string | - | yes |
 | dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `centos_7.4` | no |
-| internal_networks | Subnet ranges for all internal networks | string | `` | no |
+| internal_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | masters_associate_public_ip_address | [MASTERS] Associate a public ip address with there instances | string | `true` | no |
 | masters_aws_ami | [MASTERS] AMI to be used | string | `` | no |
 | masters_iam_instance_profile | [MASTERS] Instance profile to be used for these instances | string | `` | no |
