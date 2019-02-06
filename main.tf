@@ -55,13 +55,13 @@ resource "aws_key_pair" "deployer" {
 
 // Create a VPC and subnets
 module "dcos-vpc" {
-  source = "github.com/dcos-terraform/terraform-aws-vpc?ref=multi-region"
-
-  # version = "~> 0.1.0"
+  source  = "dcos-terraform/vpc/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
+
   subnet_range       = "${var.subnet_range}"
   cluster_name       = "${var.cluster_name}"
   availability_zones = ["${coalescelist(var.availability_zones, data.aws_availability_zones.available.names)}"]
@@ -69,17 +69,19 @@ module "dcos-vpc" {
 
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
-  source = "dcos-terraform/security-groups/aws"
+  source  = "dcos-terraform/security-groups/aws"
   version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
   }
+
   vpc_id                         = "${module.dcos-vpc.vpc_id}"
   subnet_range                   = "${var.subnet_range}"
   cluster_name                   = "${var.cluster_name}"
   admin_ips                      = ["${var.admin_ips}"]
   public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
+  public_agents_access_ips       = ["${var.public_agents_access_ips}"]
   internal_networks              = ["${var.internal_networks}"]
 }
 
