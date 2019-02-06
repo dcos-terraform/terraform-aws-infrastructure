@@ -6,8 +6,8 @@ EXAMPLE
 -------
 
 ```hcl
-module "dcos-master-instances" {
-  source  = "terraform-dcos/masters/aws"
+module "dcos-infrastructure" {
+  source  = "dcos-terraform/infrastructure/aws"
   version = "~> 0.1.0"
 
   cluster_name = "production"
@@ -16,6 +16,14 @@ module "dcos-master-instances" {
   num_masters = "3"
   num_private_agents = "2"
   num_public_agents = "1"
+}
+
+output "bootstrap-public-ip" {
+  value = "${module.dcos-infrastructure.bootstrap.public_ip}"
+}
+
+output "masters-public-ips" {
+  value = "${module.dcos-infrastructure.masters.public_ips}"
 }
 ```
 
@@ -46,6 +54,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | aws_s3_bucket | S3 Bucket for External Exhibitor | string | `` | no |
 | bootstrap_associate_public_ip_address | [BOOTSTRAP] Associate a public ip address with there instances | string | `true` | no |
 | bootstrap_aws_ami | [BOOTSTRAP] AMI to be used | string | `` | no |
+| bootstrap_hostname_format | [BOOTSTRAP] Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-bootstrap%[1]d-%[2]s` | no |
 | bootstrap_iam_instance_profile | [BOOTSTRAP] Instance profile to be used for these instances | string | `` | no |
 | bootstrap_instance_type | [BOOTSTRAP] Instance type | string | `t2.medium` | no |
 | bootstrap_os | [BOOTSTRAP] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
@@ -56,6 +65,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | internal_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | masters_associate_public_ip_address | [MASTERS] Associate a public ip address with there instances | string | `true` | no |
 | masters_aws_ami | [MASTERS] AMI to be used | string | `` | no |
+| masters_hostname_format | [MASTERS] Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-master%[1]d-%[2]s` | no |
 | masters_iam_instance_profile | [MASTERS] Instance profile to be used for these instances | string | `` | no |
 | masters_instance_type | [MASTERS] Instance type | string | `m4.xlarge` | no |
 | masters_os | [MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
@@ -67,6 +77,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | num_public_agents | Specify the amount of public agents. These agents will host marathon-lb and edgelb | string | `1` | no |
 | private_agents_associate_public_ip_address | [PRIVATE AGENTS] Associate a public ip address with there instances | string | `true` | no |
 | private_agents_aws_ami | [PRIVATE AGENTS] AMI to be used | string | `` | no |
+| private_agents_hostname_format | [PRIVATE AGENTS] Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-privateagent%[1]d-%[2]s` | no |
 | private_agents_iam_instance_profile | [PRIVATE AGENTS] Instance profile to be used for these instances | string | `` | no |
 | private_agents_instance_type | [PRIVATE AGENTS] Instance type | string | `m4.xlarge` | no |
 | private_agents_os | [PRIVATE AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
@@ -76,6 +87,11 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public_agents_additional_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | string | `<list>` | no |
 | public_agents_associate_public_ip_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `true` | no |
 | public_agents_aws_ami | [PUBLIC AGENTS] AMI to be used | string | `` | no |
+| public_agents_access_ips | List of ips allowed access to public agents. admin_ips are joined to this list | list | `<list>` | no |
+| public_agents_additional_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | string | `<list>` | no |
+| public_agents_associate_public_ip_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `true` | no |
+| public_agents_aws_ami | [PUBLIC AGENTS] AMI to be used | string | `` | no |
+| public_agents_hostname_format | [PUBLIC AGENTS] Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-publicagent%[1]d-%[2]s` | no |
 | public_agents_iam_instance_profile | [PUBLIC AGENTS] Instance profile to be used for these instances | string | `` | no |
 | public_agents_instance_type | [PUBLIC AGENTS] Instance type | string | `m4.xlarge` | no |
 | public_agents_os | [PUBLIC AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
