@@ -69,9 +69,8 @@ module "dcos-vpc" {
 
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
-  source = "github.com/dcos-terraform/terraform-aws-security-groups?ref=multi-region"
-
-  # version = "0.1.0"
+  source = "dcos-terraform/security-groups/aws"
+  version = "~> 0.1.0"
 
   providers = {
     aws = "aws"
@@ -81,6 +80,7 @@ module "dcos-security-groups" {
   cluster_name                   = "${var.cluster_name}"
   admin_ips                      = ["${var.admin_ips}"]
   public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
+  internal_networks              = ["${var.internal_networks}"]
 }
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
