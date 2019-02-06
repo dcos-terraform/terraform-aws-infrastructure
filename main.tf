@@ -7,8 +7,8 @@
  * -------
  *
  *```hcl
- * module "dcos-master-instances" {
- *   source  = "terraform-dcos/masters/aws"
+ * module "dcos-infrastructure" {
+ *   source  = "dcos-terraform/infrastructure/aws"
  *   version = "~> 0.1.0"
  *
  *   cluster_name = "production"
@@ -17,6 +17,14 @@
  *   num_masters = "3"
  *   num_private_agents = "2"
  *   num_public_agents = "1"
+ * }
+ *
+ * output "bootstrap-public-ip" {
+ *   value = "${module.dcos-infrastructure.bootstrap.public_ip}"
+ * }
+ *
+ * output "masters-public-ips" {
+ *   value = "${module.dcos-infrastructure.masters.public_ips}"
  * }
  *```
  *
@@ -80,6 +88,7 @@ module "dcos-security-groups" {
   subnet_range                   = "${var.subnet_range}"
   cluster_name                   = "${var.cluster_name}"
   admin_ips                      = ["${var.admin_ips}"]
+  public_agents_access_ips       = ["${var.public_agents_access_ips}"]
   public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
   public_agents_access_ips       = ["${var.public_agents_access_ips}"]
   internal_networks              = "${var.internal_networks}"
@@ -130,6 +139,8 @@ module "dcos-bootstrap-instance" {
   aws_associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
   name_prefix                     = "${var.name_prefix}"
   tags                            = "${var.tags}"
+  hostname_format                 = "${var.bootstrap_hostname_format}"
+
 }
 
 module "dcos-master-instances" {
@@ -152,6 +163,7 @@ module "dcos-master-instances" {
   aws_instance_type               = "${var.masters_instance_type}"
   aws_associate_public_ip_address = "${var.masters_associate_public_ip_address}"
   tags                            = "${var.tags}"
+  hostname_format                 = "${var.masters_hostname_format}"
 }
 
 module "dcos-privateagent-instances" {
@@ -176,6 +188,8 @@ module "dcos-privateagent-instances" {
   aws_associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
   name_prefix                     = "${var.name_prefix}"
   tags                            = "${var.tags}"
+  hostname_format                 = "${var.private_agents_hostname_format}"
+
 }
 
 // DC/OS tested OSes provides sample AMIs and user-data
@@ -202,6 +216,8 @@ module "dcos-publicagent-instances" {
   aws_associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
   name_prefix                     = "${var.name_prefix}"
   tags                            = "${var.tags}"
+  hostname_format                 = "${var.public_agents_hostname_format}"
+
 }
 
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.

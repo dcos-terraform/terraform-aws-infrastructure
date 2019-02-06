@@ -104,6 +104,11 @@ variable "bootstrap_associate_public_ip_address" {
   default     = true
 }
 
+variable "bootstrap_hostname_format" {
+  description = "[BOOTSTRAP] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-bootstrap%[1]d-%[2]s"
+}
+
 variable "masters_aws_ami" {
   description = "[MASTERS] AMI to be used"
   default     = ""
@@ -132,6 +137,11 @@ variable "masters_instance_type" {
 variable "masters_associate_public_ip_address" {
   description = "[MASTERS] Associate a public ip address with there instances"
   default     = true
+}
+
+variable "masters_hostname_format" {
+  description = "[MASTERS] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-master%[1]d-%[2]s"
 }
 
 variable "private_agents_aws_ami" {
@@ -169,6 +179,11 @@ variable "private_agents_associate_public_ip_address" {
   default     = true
 }
 
+variable "private_agents_hostname_format" {
+  description = "[PRIVATE AGENTS] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-privateagent%[1]d-%[2]s"
+}
+
 variable "public_agents_aws_ami" {
   description = "[PUBLIC AGENTS] AMI to be used"
   default     = ""
@@ -202,6 +217,11 @@ variable "public_agents_instance_type" {
 variable "public_agents_associate_public_ip_address" {
   description = "[PUBLIC AGENTS] Associate a public ip address with there instances"
   default     = true
+}
+
+variable "public_agents_hostname_format" {
+  description = "[PUBLIC AGENTS] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-publicagent%[1]d-%[2]s"
 }
 
 variable "public_agents_additional_ports" {
