@@ -88,6 +88,7 @@ module "dcos-security-groups" {
   subnet_range                   = "${var.subnet_range}"
   cluster_name                   = "${var.cluster_name}"
   admin_ips                      = ["${var.admin_ips}"]
+  public_agents_access_ips       = ["${var.public_agents_access_ips}"]
   public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
 }
 
@@ -134,7 +135,9 @@ module "dcos-bootstrap-instance" {
   aws_iam_instance_profile        = "${var.bootstrap_iam_instance_profile}"
   aws_instance_type               = "${var.bootstrap_instance_type}"
   aws_associate_public_ip_address = "${var.bootstrap_associate_public_ip_address}"
-  tags                            = "${var.tags}"
+  hostname_format                 = "${var.bootstrap_hostname_format}"
+
+  tags = "${var.tags}"
 }
 
 module "dcos-master-instances" {
@@ -159,6 +162,7 @@ module "dcos-master-instances" {
   aws_iam_instance_profile        = "${coalesce(var.masters_iam_instance_profile, module.dcos-iam.aws_master_profile)}"
   aws_instance_type               = "${var.masters_instance_type}"
   aws_associate_public_ip_address = "${var.masters_associate_public_ip_address}"
+  hostname_format                 = "${var.masters_hostname_format}"
 
   tags = "${var.tags}"
 }
@@ -186,6 +190,7 @@ module "dcos-privateagent-instances" {
   aws_iam_instance_profile        = "${coalesce(var.private_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.private_agents_instance_type}"
   aws_associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
+  hostname_format                 = "${var.private_agents_hostname_format}"
 
   tags = "${var.tags}"
 }
@@ -215,6 +220,7 @@ module "dcos-publicagent-instances" {
   aws_iam_instance_profile        = "${coalesce(var.public_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.public_agents_instance_type}"
   aws_associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
+  hostname_format                 = "${var.public_agents_hostname_format}"
 
   tags = "${var.tags}"
 }
