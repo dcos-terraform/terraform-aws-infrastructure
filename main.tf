@@ -169,7 +169,7 @@ module "dcos-master-instances" {
 
 module "dcos-privateagent-instances" {
   source  = "dcos-terraform/private-agents/aws"
-  version = "~> 0.1.0"
+  version = "~> 0.1.2"
 
   providers = {
     aws = "aws"
