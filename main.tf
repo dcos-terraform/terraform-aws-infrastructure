@@ -158,6 +158,8 @@ module "dcos-master-instances" {
 
   dcos_instance_os                = "${coalesce(var.masters_os,var.dcos_instance_os)}"
   aws_ami                         = "${var.aws_ami}"
+  aws_ami_list                    = "${var.masters_aws_ami_list}"
+  private_ip_list                 = "${var.masters_private_ip_list}"
   aws_root_volume_size            = "${var.masters_root_volume_size}"
   aws_iam_instance_profile        = "${coalesce(var.masters_iam_instance_profile, module.dcos-iam.aws_master_profile)}"
   aws_instance_type               = "${var.masters_instance_type}"

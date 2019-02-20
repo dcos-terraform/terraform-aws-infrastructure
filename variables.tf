@@ -114,6 +114,11 @@ variable "masters_aws_ami" {
   default     = ""
 }
 
+variable "masters_aws_ami_list" {
+  description = "[MASTERS] AMI list to be used"
+  default     = []
+}
+
 variable "masters_os" {
   description = "[MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS."
   default     = ""
@@ -132,6 +137,11 @@ variable "masters_iam_instance_profile" {
 variable "masters_instance_type" {
   description = "[MASTERS] Instance type"
   default     = "m4.xlarge"
+}
+
+variable "masters_private_ip_list" {
+  description = "[MASTERS] Private IPs list to be used"
+  default     = []
 }
 
 variable "masters_associate_public_ip_address" {
