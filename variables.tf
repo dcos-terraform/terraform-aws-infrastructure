@@ -65,7 +65,7 @@ variable "num_public_agents" {
 }
 
 variable "aws_ami" {
-  description = "AMI that will be used for the instances instead of Mesosphere provided AMIs"
+  description = "AMI that will be used for the instances instead of the Mesosphere chosen default images. Custom AMIs must fulfill the Mesosphere DC/OS system-requirements: See https://docs.mesosphere.com/1.12/installing/production/system-requirements/"
   default     = ""
 }
 
@@ -104,6 +104,11 @@ variable "bootstrap_associate_public_ip_address" {
   default     = true
 }
 
+variable "bootstrap_hostname_format" {
+  description = "[BOOTSTRAP] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-bootstrap%[1]d-%[2]s"
+}
+
 variable "masters_aws_ami" {
   description = "[MASTERS] AMI to be used"
   default     = ""
@@ -134,6 +139,11 @@ variable "masters_associate_public_ip_address" {
   default     = true
 }
 
+variable "masters_hostname_format" {
+  description = "[MASTERS] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-master%[1]d-%[2]s"
+}
+
 variable "private_agents_aws_ami" {
   description = "[PRIVATE AGENTS] AMI to be used"
   default     = ""
@@ -154,6 +164,11 @@ variable "private_agents_root_volume_type" {
   default     = "gp2"
 }
 
+variable "private_agents_extra_volumes" {
+  description = "[PRIVATE AGENTS] Extra volumes for each private agent"
+  default     = []
+}
+
 variable "private_agents_iam_instance_profile" {
   description = "[PRIVATE AGENTS] Instance profile to be used for these instances"
   default     = ""
@@ -167,6 +182,11 @@ variable "private_agents_instance_type" {
 variable "private_agents_associate_public_ip_address" {
   description = "[PRIVATE AGENTS] Associate a public ip address with there instances"
   default     = true
+}
+
+variable "private_agents_hostname_format" {
+  description = "[PRIVATE AGENTS] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-privateagent%[1]d-%[2]s"
 }
 
 variable "public_agents_aws_ami" {
@@ -204,9 +224,20 @@ variable "public_agents_associate_public_ip_address" {
   default     = true
 }
 
+variable "public_agents_hostname_format" {
+  description = "[PUBLIC AGENTS] Format the hostname inputs are index+1, region, cluster_name"
+  default     = "%[3]s-publicagent%[1]d-%[2]s"
+}
+
 variable "public_agents_additional_ports" {
   description = "List of additional ports allowed for public access on public agents (80 and 443 open by default)"
   default     = []
+}
+
+variable "public_agents_access_ips" {
+  description = "List of ips allowed access to public agents. admin_ips are joined to this list"
+  type        = "list"
+  default     = ["0.0.0.0/0"]
 }
 
 variable "aws_s3_bucket" {
