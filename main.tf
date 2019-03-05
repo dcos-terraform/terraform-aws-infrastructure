@@ -168,7 +168,7 @@ module "dcos-master-instances" {
 
 module "dcos-privateagent-instances" {
   source  = "dcos-terraform/private-agents/aws"
-  version = "~> 0.1.0"
+  version = "~> 0.1.2"
 
   providers = {
     aws = "aws"
@@ -183,6 +183,7 @@ module "dcos-privateagent-instances" {
   aws_ami                         = "${var.aws_ami}"
   aws_root_volume_size            = "${var.private_agents_root_volume_size}"
   aws_root_volume_type            = "${var.private_agents_root_volume_type}"
+  aws_extra_volumes               = ["${var.private_agents_extra_volumes}"]
   aws_iam_instance_profile        = "${coalesce(var.private_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.private_agents_instance_type}"
   aws_associate_public_ip_address = "${var.private_agents_associate_public_ip_address}"
