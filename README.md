@@ -62,6 +62,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | bootstrap_root_volume_type | [BOOTSTRAP] Root volume type | string | `standard` | no |
 | cluster_name | Name of the DC/OS cluster | string | - | yes |
 | dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `centos_7.4` | no |
+| internal_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | masters_associate_public_ip_address | [MASTERS] Associate a public ip address with there instances | string | `true` | no |
 | masters_aws_ami | [MASTERS] AMI to be used | string | `` | no |
 | masters_hostname_format | [MASTERS] Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-master%[1]d-%[2]s` | no |
@@ -69,6 +70,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | masters_instance_type | [MASTERS] Instance type | string | `m4.xlarge` | no |
 | masters_os | [MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
 | masters_root_volume_size | [MASTERS] Root volume size in GB | string | `120` | no |
+| name_prefix | Name Prefix | string | `` | no |
 | num_bootstrap | Specify the amount of bootstrap. You should have at most 1 | string | `1` | no |
 | num_masters | Specify the amount of masters. For redundancy you should have at least 3 | string | `3` | no |
 | num_private_agents | Specify the amount of private agents. These agents will provide your main resources | string | `2` | no |

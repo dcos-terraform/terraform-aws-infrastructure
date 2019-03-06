@@ -244,3 +244,14 @@ variable "aws_s3_bucket" {
   description = "S3 Bucket for External Exhibitor"
   default     = ""
 }
+
+variable "name_prefix" {
+  description = "Name Prefix"
+  default     = ""
+}
+
+variable "internal_networks" {
+  description = "Subnet ranges for all internal networks"
+  type        = "list"
+  default     = []
+}
