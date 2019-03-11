@@ -140,7 +140,6 @@ module "dcos-bootstrap-instance" {
   name_prefix                     = "${var.name_prefix}"
   tags                            = "${var.tags}"
   hostname_format                 = "${var.bootstrap_hostname_format}"
-
 }
 
 module "dcos-master-instances" {
@@ -190,7 +189,6 @@ module "dcos-privateagent-instances" {
   name_prefix                     = "${var.name_prefix}"
   tags                            = "${var.tags}"
   hostname_format                 = "${var.private_agents_hostname_format}"
-
 }
 
 // DC/OS tested OSes provides sample AMIs and user-data
@@ -218,7 +216,6 @@ module "dcos-publicagent-instances" {
   name_prefix                     = "${var.name_prefix}"
   tags                            = "${var.tags}"
   hostname_format                 = "${var.public_agents_hostname_format}"
-
 }
 
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.
