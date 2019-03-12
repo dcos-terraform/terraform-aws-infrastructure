@@ -250,7 +250,7 @@ variable "name_prefix" {
   default     = ""
 }
 
-variable "internal_networks" {
+variable "accepted_internal_networks" {
   description = "Subnet ranges for all internal networks"
   type        = "list"
   default     = []

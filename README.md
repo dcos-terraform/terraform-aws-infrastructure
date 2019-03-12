@@ -47,6 +47,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| accepted_internal_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | admin_ips | List of CIDR admin IPs | list | - | yes |
 | availability_zones | Availability zones to be used | list | `<list>` | no |
 | aws_ami | AMI that will be used for the instances instead of the Mesosphere chosen default images. Custom AMIs must fulfill the Mesosphere DC/OS system-requirements: See https://docs.mesosphere.com/1.12/installing/production/system-requirements/ | string | `` | no |
@@ -62,7 +63,6 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | bootstrap_root_volume_type | [BOOTSTRAP] Root volume type | string | `standard` | no |
 | cluster_name | Name of the DC/OS cluster | string | - | yes |
 | dcos_instance_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `centos_7.4` | no |
-| internal_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | masters_associate_public_ip_address | [MASTERS] Associate a public ip address with there instances | string | `true` | no |
 | masters_aws_ami | [MASTERS] AMI to be used | string | `` | no |
 | masters_hostname_format | [MASTERS] Format the hostname inputs are index+1, region, cluster_name | string | `%[3]s-master%[1]d-%[2]s` | no |
