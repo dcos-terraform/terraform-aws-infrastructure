@@ -100,7 +100,7 @@ module "dcos-security-groups" {
   public_agents_access_ips       = ["${var.public_agents_access_ips}"]
   public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
   public_agents_access_ips       = ["${var.public_agents_access_ips}"]
-  internal_networks              = ["${var.internal_networks}"]
+  accepted_internal_networks     = ["${var.accepted_internal_networks}"]
 }
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
