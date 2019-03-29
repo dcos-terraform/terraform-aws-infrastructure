@@ -255,3 +255,13 @@ variable "accepted_internal_networks" {
   type        = "list"
   default     = []
 }
+
+variable "lb_disable_masters" {
+  description = "Do not spawn master load balancer (admin access + internal access)"
+  default     = false
+}
+
+variable "lb_disable_public_agents" {
+  description = "Do not spawn public agent load balancers. ( Needs to be true when num_public_agents is 0 )"
+  default     = false
+}

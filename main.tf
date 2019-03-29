@@ -230,7 +230,7 @@ module "dcos-publicagent-instances" {
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.
 module "dcos-lb" {
   source  = "dcos-terraform/lb-dcos/aws"
-  version = "~> 0.0.0"
+  version = "~> 0.2.0"
 
   providers = {
     aws = "aws"
@@ -246,5 +246,6 @@ module "dcos-lb" {
   num_public_agents                  = "${var.num_public_agents}"
   public_agent_instances             = ["${module.dcos-publicagent-instances.instances}"]
   public_agents_additional_listeners = ["${data.null_data_source.lb_rules.*.outputs}"]
+  name_prefix                        = "${var.name_prefix}"
   tags                               = "${var.tags}"
 }
