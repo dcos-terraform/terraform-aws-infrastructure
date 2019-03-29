@@ -129,7 +129,17 @@ output "vpc.main_route_table_id" {
   value       = "${module.dcos-vpc.aws_main_route_table_id}"
 }
 
+output "vpc.subnet_ids" {
+  description = "This is the list of subnet_ids the cluster is in"
+  value       = ["${module.dcos-vpc.subnet_ids}"]
+}
+
 output "security_group.internal_id" {
   description = "This is the id of the internal security_group that the cluster is in"
   value       = "${module.dcos-security-groups.internal}"
+}
+
+output "security_group.admin" {
+  description = "This is the id of the admin security_group that the cluster is in"
+  value       = "${module.dcos-security-groups.admin}"
 }
