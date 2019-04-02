@@ -143,3 +143,8 @@ output "security_group.admin" {
   description = "This is the id of the admin security_group that the cluster is in"
   value       = "${module.dcos-security-groups.admin}"
 }
+
+output "aws_key_pair.key_name" {
+  description = "This is the key_name of the ssh key created"
+  value = "${aws_key_pair.deployer.*.key_name}"
+}
