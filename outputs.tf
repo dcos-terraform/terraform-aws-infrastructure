@@ -124,7 +124,7 @@ output "lb.masters_internal_dns_name" {
   value       = "${module.dcos-lb.masters_internal_dns_name}"
 }
 
-output "security_groups.internal_id" {
+output "security_groups.internal" {
   description = "This is the id of the internal security_group that the cluster is in"
   value       = "${module.dcos-security-groups.internal}"
 }
