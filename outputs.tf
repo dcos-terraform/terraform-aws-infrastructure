@@ -1,6 +1,6 @@
 output "aws_key_pair.key_name" {
   description = "This is the key_name of the ssh key created"
-  value       = "${flatten(aws_key_pair.deployer.*.key_name)}"
+  value       = "${join(",", flatten(aws_key_pair.deployer.*.key_name))}"
 }
 
 output "bootstrap.instance" {
