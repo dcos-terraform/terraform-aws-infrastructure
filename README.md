@@ -47,6 +47,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| accepted_internal_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | admin_ips | List of CIDR admin IPs | list | - | yes |
 | availability_zones | Availability zones to be used | list | `<list>` | no |
 | aws_ami | AMI that will be used for the instances instead of the Mesosphere chosen default images. Custom AMIs must fulfill the Mesosphere DC/OS system-requirements: See https://docs.mesosphere.com/1.12/installing/production/system-requirements/ | string | `` | no |
@@ -69,6 +70,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | masters_instance_type | [MASTERS] Instance type | string | `m4.xlarge` | no |
 | masters_os | [MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `` | no |
 | masters_root_volume_size | [MASTERS] Root volume size in GB | string | `120` | no |
+| name_prefix | Name Prefix | string | `` | no |
 | num_bootstrap | Specify the amount of bootstrap. You should have at most 1 | string | `1` | no |
 | num_masters | Specify the amount of masters. For redundancy you should have at least 3 | string | `3` | no |
 | num_private_agents | Specify the amount of private agents. These agents will provide your main resources | string | `2` | no |
@@ -94,7 +96,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public_agents_root_volume_type | [PUBLIC AGENTS] Specify the root volume type. | string | `gp2` | no |
 | ssh_public_key | SSH public key in authorized keys format (e.g. 'ssh-rsa ..') to be used with the instances. Make sure you added this key to your ssh-agent. | string | `` | no |
 | ssh_public_key_file | Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string. | string | - | yes |
-| subnet_range | Private IP space to be used in CIDR format | string | `172.12.0.0/16` | no |
+| subnet_range | Private IP space to be used in CIDR format | string | `172.16.0.0/16` | no |
 | tags | Add custom tags to all resources | map | `<map>` | no |
 
 ## Outputs

@@ -15,7 +15,7 @@ variable "availability_zones" {
 
 variable "subnet_range" {
   description = "Private IP space to be used in CIDR format"
-  default     = "172.12.0.0/16"
+  default     = "172.16.0.0/16"
 }
 
 variable "tags" {
@@ -243,4 +243,25 @@ variable "public_agents_access_ips" {
 variable "aws_s3_bucket" {
   description = "S3 Bucket for External Exhibitor"
   default     = ""
+}
+
+variable "name_prefix" {
+  description = "Name Prefix"
+  default     = ""
+}
+
+variable "accepted_internal_networks" {
+  description = "Subnet ranges for all internal networks"
+  type        = "list"
+  default     = []
+}
+
+variable "lb_disable_masters" {
+  description = "Do not spawn master load balancer (admin access + internal access)"
+  default     = false
+}
+
+variable "lb_disable_public_agents" {
+  description = "Do not spawn public agent load balancers. ( Needs to be true when num_public_agents is 0 )"
+  default     = false
 }
