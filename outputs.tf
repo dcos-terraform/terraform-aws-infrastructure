@@ -1,3 +1,8 @@
+output "aws_key_pair.key_name" {
+  description = "This is the key_name of the ssh key created"
+  value       = "${aws_key_pair.deployer.*.key_name}"
+}
+
 output "bootstrap.instance" {
   description = "Bootstrap instance ID"
   value       = "${module.dcos-bootstrap-instance.instance}"
@@ -99,6 +104,11 @@ output "public_agents.prereq-id" {
   value       = "${module.dcos-publicagent-instances.prereq-id}"
 }
 
+output "iam.agent_profile" {
+  value       = "${module.dcos-iam.aws_agent_profile}"
+  description = "Name of the agent profile"
+}
+
 output "lb.public_agents_dns_name" {
   description = "This is the load balancer to reach the public agents"
   value       = "${module.dcos-lb.public_agents_dns_name}"
@@ -112,6 +122,16 @@ output "lb.masters_dns_name" {
 output "lb.masters_internal_dns_name" {
   description = "This is the load balancer to access the masters internally in the cluster"
   value       = "${module.dcos-lb.masters_internal_dns_name}"
+}
+
+output "security_group.internal_id" {
+  description = "This is the id of the internal security_group that the cluster is in"
+  value       = "${module.dcos-security-groups.internal}"
+}
+
+output "security_group.admin" {
+  description = "This is the id of the admin security_group that the cluster is in"
+  value       = "${module.dcos-security-groups.admin}"
 }
 
 output "vpc.id" {
@@ -132,19 +152,4 @@ output "vpc.main_route_table_id" {
 output "vpc.subnet_ids" {
   description = "This is the list of subnet_ids the cluster is in"
   value       = ["${module.dcos-vpc.subnet_ids}"]
-}
-
-output "security_group.internal_id" {
-  description = "This is the id of the internal security_group that the cluster is in"
-  value       = "${module.dcos-security-groups.internal}"
-}
-
-output "security_group.admin" {
-  description = "This is the id of the admin security_group that the cluster is in"
-  value       = "${module.dcos-security-groups.admin}"
-}
-
-output "aws_key_pair.key_name" {
-  description = "This is the key_name of the ssh key created"
-  value       = "${aws_key_pair.deployer.*.key_name}"
 }
