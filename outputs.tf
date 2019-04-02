@@ -146,5 +146,5 @@ output "security_group.admin" {
 
 output "aws_key_pair.key_name" {
   description = "This is the key_name of the ssh key created"
-  value = "${aws_key_pair.deployer.*.key_name}"
+  value       = "${aws_key_pair.deployer.*.key_name}"
 }
