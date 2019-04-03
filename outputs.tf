@@ -1,8 +1,3 @@
-output "aws_key_pair.key_name" {
-  description = "This is the key_name of the ssh key created"
-  value       = "${join(",", flatten(aws_key_pair.deployer.*.key_name))}"
-}
-
 output "bootstrap.instance" {
   description = "Bootstrap instance ID"
   value       = "${module.dcos-bootstrap-instance.instance}"
@@ -152,4 +147,9 @@ output "vpc.main_route_table_id" {
 output "vpc.subnet_ids" {
   description = "This is the list of subnet_ids the cluster is in"
   value       = ["${module.dcos-vpc.subnet_ids}"]
+}
+
+output "aws_key_name" {
+  description = "This is the AWS key name used for the cluster"
+  value       = "${local.aws_key_name}"
 }
