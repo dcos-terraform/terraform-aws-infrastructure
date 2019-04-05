@@ -150,6 +150,6 @@ output "vpc.subnet_ids" {
 }
 
 output "aws_key_name" {
-  description = "This is the AWS key name used for the cluster"
+  description = "Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key_file to empty string"
   value       = "${local.aws_key_name}"
 }
