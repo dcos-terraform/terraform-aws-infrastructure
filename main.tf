@@ -253,5 +253,8 @@ module "dcos-lb" {
   name_prefix                        = "${var.name_prefix}"
   disable_masters                    = "${var.lb_disable_masters}"
   disable_public_agents              = "${var.lb_disable_public_agents}"
+  masters_acm_cert_arn               = "${var.masters_acm_cert_arn}"
+  masters_internal_acm_cert_arn      = "${var.masters_internal_acm_cert_arn}"
+  public_agents_acm_cert_arn         = "${var.public_agents_acm_cert_arn}"
   tags                               = "${var.tags}"
 }

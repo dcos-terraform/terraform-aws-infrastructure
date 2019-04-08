@@ -265,3 +265,18 @@ variable "lb_disable_public_agents" {
   description = "Do not spawn public agent load balancers. ( Needs to be true when num_public_agents is 0 )"
   default     = false
 }
+
+variable "masters_acm_cert_arn" {
+  description = "ACM certifacte to be used for the masters load balancer"
+  default     = ""
+}
+
+variable "masters_internal_acm_cert_arn" {
+  description = "ACM certifacte to be used for the internal masters load balancer"
+  default     = ""
+}
+
+variable "public_agents_acm_cert_arn" {
+  description = "ACM certifacte to be used for the public agents load balancer"
+  default     = ""
+}
