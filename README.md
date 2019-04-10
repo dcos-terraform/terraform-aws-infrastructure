@@ -63,11 +63,13 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `"centos_7.4"` | no |
 | lb\_disable\_masters | Do not spawn master load balancer (admin access + internal access) | string | `"false"` | no |
 | lb\_disable\_public\_agents | Do not spawn public agent load balancers. ( Needs to be true when num_public_agents is 0 ) | string | `"false"` | no |
+| masters\_acm\_cert\_arn | ACM certifacte to be used for the masters load balancer | string | `""` | no |
 | masters\_associate\_public\_ip\_address | [MASTERS] Associate a public ip address with there instances | string | `"true"` | no |
 | masters\_aws\_ami | [MASTERS] AMI to be used | string | `""` | no |
 | masters\_hostname\_format | [MASTERS] Format the hostname inputs are index+1, region, cluster_name | string | `"%[3]s-master%[1]d-%[2]s"` | no |
 | masters\_iam\_instance\_profile | [MASTERS] Instance profile to be used for these instances | string | `""` | no |
 | masters\_instance\_type | [MASTERS] Instance type | string | `"m4.xlarge"` | no |
+| masters\_internal\_acm\_cert\_arn | ACM certifacte to be used for the internal masters load balancer | string | `""` | no |
 | masters\_os | [MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `""` | no |
 | masters\_root\_volume\_size | [MASTERS] Root volume size in GB | string | `"120"` | no |
 | name\_prefix | Name Prefix | string | `""` | no |
@@ -85,6 +87,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | private\_agents\_root\_volume\_size | [PRIVATE AGENTS] Root volume size in GB | string | `"120"` | no |
 | private\_agents\_root\_volume\_type | [PRIVATE AGENTS] Root volume type | string | `"gp2"` | no |
 | public\_agents\_access\_ips | List of ips allowed access to public agents. admin_ips are joined to this list | list | `<list>` | no |
+| public\_agents\_acm\_cert\_arn | ACM certifacte to be used for the public agents load balancer | string | `""` | no |
 | public\_agents\_additional\_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | list | `<list>` | no |
 | public\_agents\_associate\_public\_ip\_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `"true"` | no |
 | public\_agents\_aws\_ami | [PUBLIC AGENTS] AMI to be used | string | `""` | no |
