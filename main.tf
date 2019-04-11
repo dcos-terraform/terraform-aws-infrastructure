@@ -117,14 +117,18 @@ module "dcos-iam" {
   }
 
   cluster_name  = "${var.cluster_name}"
-  aws_s3_bucket = "${var.aws_s3_bucket}"
+  aws_s3_bucket = "${var.aws_create_s3_bucket ? join(",",aws_s3_bucket.external_exhibitor.*.id) : ""}"
   name_prefix   = "${var.name_prefix}"
 }
 
-// If External Exhibitor is Specified, Create the Bucket
+resource "random_id" "bucketname" {
+  byte_length = 16
+  prefix      = "${var.cluster_name}"
+}
+
 resource "aws_s3_bucket" "external_exhibitor" {
-  count  = "${var.aws_s3_bucket != "" ? 1 : 0}"
-  bucket = "${var.aws_s3_bucket}"
+  count  = "${var.aws_create_s3_bucket ? 1 : 0}"
+  bucket = "${join(",",random_id.bucketname.*.hex)}"
   acl    = "private"
 
   tags = "${var.tags}"

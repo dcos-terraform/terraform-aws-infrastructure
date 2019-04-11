@@ -240,9 +240,9 @@ variable "public_agents_access_ips" {
   default     = ["0.0.0.0/0"]
 }
 
-variable "aws_s3_bucket" {
-  description = "S3 Bucket for External Exhibitor"
-  default     = ""
+variable "aws_create_s3_bucket" {
+  description = "Create S3 bucket with unique name for exhibitor."
+  default     = false
 }
 
 variable "name_prefix" {
