@@ -127,9 +127,10 @@ resource "random_id" "bucketname" {
 }
 
 resource "aws_s3_bucket" "external_exhibitor" {
-  count  = "${var.aws_create_s3_bucket ? 1 : 0}"
-  bucket = "${join(",",random_id.bucketname.*.hex)}"
-  acl    = "private"
+  count         = "${var.aws_create_s3_bucket ? 1 : 0}"
+  bucket        = "${join(",",random_id.bucketname.*.hex)}"
+  acl           = "private"
+  force_destroy = true                                      // destroy no mater if empty or not
 
   tags = "${var.tags}"
 }
