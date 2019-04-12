@@ -153,3 +153,8 @@ output "aws_key_name" {
   description = "Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key_file to empty string"
   value       = "${local.aws_key_name}"
 }
+
+output "aws_s3_bucket_name" {
+  description = "Name of the created S3 bucket"
+  value       = "${join(",",aws_s3_bucket.external_exhibitor.*.id)}"
+}

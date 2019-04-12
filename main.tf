@@ -117,15 +117,20 @@ module "dcos-iam" {
   }
 
   cluster_name  = "${var.cluster_name}"
-  aws_s3_bucket = "${var.aws_s3_bucket}"
+  aws_s3_bucket = "${var.aws_create_s3_bucket ? join(",",aws_s3_bucket.external_exhibitor.*.id) : ""}"
   name_prefix   = "${var.name_prefix}"
 }
 
-// If External Exhibitor is Specified, Create the Bucket
+resource "random_id" "bucketname" {
+  byte_length = 16
+  prefix      = "${var.cluster_name}"
+}
+
 resource "aws_s3_bucket" "external_exhibitor" {
-  count  = "${var.aws_s3_bucket != "" ? 1 : 0}"
-  bucket = "${var.aws_s3_bucket}"
-  acl    = "private"
+  count         = "${var.aws_create_s3_bucket ? 1 : 0}"
+  bucket        = "${join(",",random_id.bucketname.*.hex)}"
+  acl           = "private"
+  force_destroy = true                                      // destroy no mater if empty or not
 
   tags = "${var.tags}"
 }
@@ -253,5 +258,8 @@ module "dcos-lb" {
   name_prefix                        = "${var.name_prefix}"
   disable_masters                    = "${var.lb_disable_masters}"
   disable_public_agents              = "${var.lb_disable_public_agents}"
+  masters_acm_cert_arn               = "${var.masters_acm_cert_arn}"
+  masters_internal_acm_cert_arn      = "${var.masters_internal_acm_cert_arn}"
+  public_agents_acm_cert_arn         = "${var.public_agents_acm_cert_arn}"
   tags                               = "${var.tags}"
 }
