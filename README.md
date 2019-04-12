@@ -45,12 +45,14 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| accepted\_internal\_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | admin\_ips | List of CIDR admin IPs | list | n/a | yes |
+| cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
+| ssh\_public\_key\_file | Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string. | string | n/a | yes |
+| accepted\_internal\_networks | Subnet ranges for all internal networks | list | `<list>` | no |
 | availability\_zones | List of availability_zones to be used as the same format that are required by the platform/cloud providers. i.e ['RegionZone'] | list | `<list>` | no |
 | aws\_ami | AMI that will be used for the instances instead of the Mesosphere chosen default images. Custom AMIs must fulfill the Mesosphere DC/OS system-requirements: See https://docs.mesosphere.com/1.12/installing/production/system-requirements/ | string | `""` | no |
+| aws\_create\_s3\_bucket | Create S3 bucket with unique name for exhibitor. | string | `"false"` | no |
 | aws\_key\_name | Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key_file to empty string | string | `""` | no |
-| aws\_s3\_bucket | S3 Bucket for External Exhibitor | string | `""` | no |
 | bootstrap\_associate\_public\_ip\_address | [BOOTSTRAP] Associate a public ip address with there instances | string | `"true"` | no |
 | bootstrap\_aws\_ami | [BOOTSTRAP] AMI to be used | string | `""` | no |
 | bootstrap\_hostname\_format | [BOOTSTRAP] Format the hostname inputs are index+1, region, cluster_name | string | `"%[3]s-bootstrap%[1]d-%[2]s"` | no |
@@ -59,7 +61,6 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | bootstrap\_os | [BOOTSTRAP] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `""` | no |
 | bootstrap\_root\_volume\_size | [BOOTSTRAP] Root volume size in GB | string | `"80"` | no |
 | bootstrap\_root\_volume\_type | [BOOTSTRAP] Root volume type | string | `"standard"` | no |
-| cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | dcos\_instance\_os | Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `"centos_7.4"` | no |
 | lb\_disable\_masters | Do not spawn master load balancer (admin access + internal access) | string | `"false"` | no |
 | lb\_disable\_public\_agents | Do not spawn public agent load balancers. ( Needs to be true when num_public_agents is 0 ) | string | `"false"` | no |
@@ -95,7 +96,6 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public\_agents\_root\_volume\_size | [PUBLIC AGENTS] Root volume size | string | `"120"` | no |
 | public\_agents\_root\_volume\_type | [PUBLIC AGENTS] Specify the root volume type. | string | `"gp2"` | no |
 | ssh\_public\_key | SSH public key in authorized keys format (e.g. 'ssh-rsa ..') to be used with the instances. Make sure you added this key to your ssh-agent. | string | `""` | no |
-| ssh\_public\_key\_file | Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string. | string | n/a | yes |
 | subnet\_range | Private IP space to be used in CIDR format | string | `"172.16.0.0/16"` | no |
 | tags | Add custom tags to all resources | map | `<map>` | no |
 
@@ -104,6 +104,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | Name | Description |
 |------|-------------|
 | aws\_key\_name | Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key_file to empty string |
+| aws\_s3\_bucket\_name | Name of the created S3 bucket |
 | bootstrap.instance | Bootstrap instance ID |
 | bootstrap.os\_user | Bootstrap instance OS default user |
 | bootstrap.prereq-id | Returns the ID of the prereq script for bootstrap (if user_data or ami are not used) |
