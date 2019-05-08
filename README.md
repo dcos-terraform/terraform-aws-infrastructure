@@ -48,7 +48,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | admin\_ips | List of CIDR admin IPs | list | n/a | yes |
 | cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | ssh\_public\_key\_file | Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string. | string | n/a | yes |
-| availability\_zones | Availability zones to be used | list | `<list>` | no |
+| availability\_zones | List of availability_zones to be used as the same format that are required by the platform/cloud providers. i.e ['RegionZone'] | list | `<list>` | no |
 | aws\_ami | AMI that will be used for the instances instead of the Mesosphere chosen default images. Custom AMIs must fulfill the Mesosphere DC/OS system-requirements: See https://docs.mesosphere.com/1.12/installing/production/system-requirements/ | string | `""` | no |
 | aws\_key\_name | Specify the aws ssh key to use. We assume its already loaded in your SSH agent. Set ssh_public_key_file to empty string | string | `""` | no |
 | aws\_s3\_bucket | S3 Bucket for External Exhibitor | string | `""` | no |
@@ -118,7 +118,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | private\_agents.private\_ips | Private Agent instances private IPs |
 | private\_agents.public\_ips | Private Agent public IPs |
 | public\_agents.instances | Public Agent instances IDs |
-| public\_agents.os\_user | Private Agent instances private OS default user |
+| public\_agents.os\_user | Public Agent instances private OS default user |
 | public\_agents.prereq-id | Returns the ID of the prereq script for public agents (if user_data or ami are not used) |
 | public\_agents.private\_ips | Public Agent instances private IPs |
 | public\_agents.public\_ips | Public Agent public IPs |
