@@ -209,6 +209,11 @@ variable "public_agents_root_volume_type" {
   default     = "gp2"
 }
 
+variable "public_agents_extra_volumes" {
+  description = "[PUBLIC AGENTS] Extra volumes for each public agent"
+  default     = []
+}
+
 variable "public_agents_iam_instance_profile" {
   description = "[PUBLIC AGENTS] Instance profile to be used for these instances"
   default     = ""
