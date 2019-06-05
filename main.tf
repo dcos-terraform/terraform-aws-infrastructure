@@ -149,7 +149,7 @@ module "dcos-bootstrap-instance" {
   aws_key_name                    = "${local.aws_key_name}"
   num_bootstrap                   = "${var.num_bootstrap}"
   dcos_instance_os                = "${coalesce(var.bootstrap_os,var.dcos_instance_os)}"
-  aws_ami                         = "${coalesce(var.bootstrap_aws_ami)}"
+  aws_ami                         = "${var.bootstrap_aws_ami}"
   aws_root_volume_size            = "${var.bootstrap_root_volume_size}"
   aws_root_volume_type            = "${var.bootstrap_root_volume_type}"
   aws_iam_instance_profile        = "${var.bootstrap_iam_instance_profile}"
