@@ -90,7 +90,7 @@ output "public_agents.private_ips" {
 }
 
 output "public_agents.os_user" {
-  description = "Private Agent instances private OS default user"
+  description = "Public Agent instances private OS default user"
   value       = "${module.dcos-publicagent-instances.os_user}"
 }
 
