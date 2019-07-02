@@ -18,11 +18,6 @@ output "bootstrap.os_user" {
   value       = "${module.dcos-bootstrap-instance.os_user}"
 }
 
-output "bootstrap.prereq-id" {
-  description = "Returns the ID of the prereq script for bootstrap (if user_data or ami are not used)"
-  value       = "${module.dcos-bootstrap-instance.prereq-id}"
-}
-
 output "masters.instances" {
   description = "Master instances IDs"
   value       = ["${module.dcos-master-instances.instances}"]
@@ -41,11 +36,6 @@ output "masters.private_ips" {
 output "masters.os_user" {
   description = "Master instances private OS default user"
   value       = "${module.dcos-master-instances.os_user}"
-}
-
-output "masters.prereq-id" {
-  description = "Returns the ID of the prereq script for masters (if user_data or ami are not used)"
-  value       = "${module.dcos-master-instances.prereq-id}"
 }
 
 output "private_agents.instances" {
@@ -68,11 +58,6 @@ output "private_agents.os_user" {
   value       = "${module.dcos-privateagent-instances.os_user}"
 }
 
-output "private_agents.prereq-id" {
-  description = "Returns the ID of the prereq script for private agents (if user_data or ami are not used)"
-  value       = "${module.dcos-privateagent-instances.prereq-id}"
-}
-
 //Private Agent
 output "public_agents.instances" {
   description = "Public Agent instances IDs"
@@ -92,11 +77,6 @@ output "public_agents.private_ips" {
 output "public_agents.os_user" {
   description = "Public Agent instances private OS default user"
   value       = "${module.dcos-publicagent-instances.os_user}"
-}
-
-output "public_agents.prereq-id" {
-  description = "Returns the ID of the prereq script for public agents (if user_data or ami are not used)"
-  value       = "${module.dcos-publicagent-instances.prereq-id}"
 }
 
 output "iam.agent_profile" {

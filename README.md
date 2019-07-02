@@ -110,7 +110,6 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | aws\_s3\_bucket\_name | Name of the created S3 bucket |
 | bootstrap.instance | Bootstrap instance ID |
 | bootstrap.os\_user | Bootstrap instance OS default user |
-| bootstrap.prereq-id | Returns the ID of the prereq script for bootstrap (if user_data or ami are not used) |
 | bootstrap.private\_ip | Private IP of the bootstrap instance |
 | bootstrap.public\_ip | Public IP of the bootstrap instance |
 | iam.agent\_profile | Name of the agent profile |
@@ -119,17 +118,14 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | lb.public\_agents\_dns\_name | This is the load balancer to reach the public agents |
 | masters.instances | Master instances IDs |
 | masters.os\_user | Master instances private OS default user |
-| masters.prereq-id | Returns the ID of the prereq script for masters (if user_data or ami are not used) |
 | masters.private\_ips | Master instances private IPs |
 | masters.public\_ips | Master instances public IPs |
 | private\_agents.instances | Private Agent instances IDs |
 | private\_agents.os\_user | Private Agent instances private OS default user |
-| private\_agents.prereq-id | Returns the ID of the prereq script for private agents (if user_data or ami are not used) |
 | private\_agents.private\_ips | Private Agent instances private IPs |
 | private\_agents.public\_ips | Private Agent public IPs |
 | public\_agents.instances | Public Agent instances IDs |
 | public\_agents.os\_user | Public Agent instances private OS default user |
-| public\_agents.prereq-id | Returns the ID of the prereq script for public agents (if user_data or ami are not used) |
 | public\_agents.private\_ips | Public Agent instances private IPs |
 | public\_agents.public\_ips | Public Agent public IPs |
 | security\_groups.admin | This is the id of the admin security_group that the cluster is in |
