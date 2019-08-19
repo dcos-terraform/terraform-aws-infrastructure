@@ -169,6 +169,11 @@ variable "private_agents_extra_volumes" {
   default     = []
 }
 
+variable "public_agents_extra_volumes" {
+  description = "[PUBLIC AGENTS] Extra volumes for each public agent"
+  default     = []
+}
+
 variable "private_agents_iam_instance_profile" {
   description = "[PRIVATE AGENTS] Instance profile to be used for these instances"
   default     = ""

@@ -212,7 +212,7 @@ module "dcos-privateagent-instances" {
 // DC/OS tested OSes provides sample AMIs and user-data
 module "dcos-publicagent-instances" {
   source  = "dcos-terraform/public-agents/aws"
-  version = "~> 0.2.0"
+  version = "~> 0.2.2"
 
   providers = {
     aws = "aws"
@@ -228,6 +228,7 @@ module "dcos-publicagent-instances" {
   aws_ami                         = "${coalesce(var.public_agents_aws_ami, var.aws_ami)}"
   aws_root_volume_size            = "${var.public_agents_root_volume_size}"
   aws_root_volume_type            = "${var.public_agents_root_volume_type}"
+  aws_extra_volumes               = ["${var.public_agents_extra_volumes}"]
   aws_iam_instance_profile        = "${coalesce(var.public_agents_iam_instance_profile, module.dcos-iam.aws_agent_profile)}"
   aws_instance_type               = "${var.public_agents_instance_type}"
   aws_associate_public_ip_address = "${var.public_agents_associate_public_ip_address}"
