@@ -73,6 +73,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | masters\_internal\_acm\_cert\_arn | ACM certifacte to be used for the internal masters load balancer | string | `""` | no |
 | masters\_os | [MASTERS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `""` | no |
 | masters\_root\_volume\_size | [MASTERS] Root volume size in GB | string | `"120"` | no |
+| masters\_user\_data | [MASTERS] User data to be used on these instances (cloud-init) | string | `""` | no |
 | name\_prefix | Name Prefix | string | `""` | no |
 | num\_bootstrap | Specify the amount of bootstrap. You should have at most 1 | string | `"1"` | no |
 | num\_masters | Specify the amount of masters. For redundancy you should have at least 3 | string | `"3"` | no |
@@ -87,6 +88,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | private\_agents\_os | [PRIVATE AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `""` | no |
 | private\_agents\_root\_volume\_size | [PRIVATE AGENTS] Root volume size in GB | string | `"120"` | no |
 | private\_agents\_root\_volume\_type | [PRIVATE AGENTS] Root volume type | string | `"gp2"` | no |
+| private\_agents\_user\_data | [PRIVATE AGENTS] User data to be used on these instances (cloud-init) | string | `""` | no |
 | public\_agents\_access\_ips | List of ips allowed access to public agents. admin_ips are joined to this list | list | `<list>` | no |
 | public\_agents\_acm\_cert\_arn | ACM certifacte to be used for the public agents load balancer | string | `""` | no |
 | public\_agents\_additional\_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | list | `<list>` | no |
@@ -99,6 +101,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public\_agents\_os | [PUBLIC AGENTS] Operating system to use. Instead of using your own AMI you could use a provided OS. | string | `""` | no |
 | public\_agents\_root\_volume\_size | [PUBLIC AGENTS] Root volume size | string | `"120"` | no |
 | public\_agents\_root\_volume\_type | [PUBLIC AGENTS] Specify the root volume type. | string | `"gp2"` | no |
+| public\_agents\_user\_data | [PUBLIC AGENTS] User data to be used on these instances (cloud-init) | string | `""` | no |
 | ssh\_public\_key | SSH public key in authorized keys format (e.g. 'ssh-rsa ..') to be used with the instances. Make sure you added this key to your ssh-agent. | string | `""` | no |
 | subnet\_range | Private IP space to be used in CIDR format | string | `"172.16.0.0/16"` | no |
 | tags | Add custom tags to all resources | map | `<map>` | no |
