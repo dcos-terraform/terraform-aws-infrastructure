@@ -144,6 +144,11 @@ variable "masters_hostname_format" {
   default     = "%[3]s-master%[1]d-%[2]s"
 }
 
+variable "masters_user_data" {
+  description = "[MASTERS] User data to be used on these instances (cloud-init)"
+  default     = ""
+}
+
 variable "private_agents_aws_ami" {
   description = "[PRIVATE AGENTS] AMI to be used"
   default     = ""
@@ -194,6 +199,11 @@ variable "private_agents_hostname_format" {
   default     = "%[3]s-privateagent%[1]d-%[2]s"
 }
 
+variable "private_agents_user_data" {
+  description = "[PRIVATE AGENTS] User data to be used on these instances (cloud-init)"
+  default     = ""
+}
+
 variable "public_agents_aws_ami" {
   description = "[PUBLIC AGENTS] AMI to be used"
   default     = ""
@@ -232,6 +242,11 @@ variable "public_agents_associate_public_ip_address" {
 variable "public_agents_hostname_format" {
   description = "[PUBLIC AGENTS] Format the hostname inputs are index+1, region, cluster_name"
   default     = "%[3]s-publicagent%[1]d-%[2]s"
+}
+
+variable "public_agents_user_data" {
+  description = "[PUBLIC AGENTS] User data to be used on these instances (cloud-init)"
+  default     = ""
 }
 
 variable "public_agents_additional_ports" {
