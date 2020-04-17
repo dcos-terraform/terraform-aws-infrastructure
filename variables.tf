@@ -302,6 +302,6 @@ variable "public_agents_acm_cert_arn" {
 }
 
 variable "adminrouter_grpc_proxy_port" {
-    description = ""
-    default     = 12379
+  description = ""
+  default     = 12379
 }
