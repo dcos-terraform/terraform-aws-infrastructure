@@ -49,6 +49,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | ssh\_public\_key\_file | Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string. | string | n/a | yes |
 | accepted\_internal\_networks | Subnet ranges for all internal networks | list | `<list>` | no |
+| adminrouter\_grpc\_proxy\_port |  | string | `"12379"` | no |
 | availability\_zones | List of availability_zones to be used as the same format that are required by the platform/cloud providers. i.e `['RegionZone']` | list | `<list>` | no |
 | aws\_ami | AMI that will be used for the instances instead of the Mesosphere chosen default images. Custom AMIs must fulfill the Mesosphere DC/OS system-requirements: See https://docs.mesosphere.com/1.12/installing/production/system-requirements/ | string | `""` | no |
 | aws\_create\_s3\_bucket | Create S3 bucket with unique name for exhibitor. | string | `"false"` | no |
@@ -117,17 +118,21 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | bootstrap.private\_ip | Private IP of the bootstrap instance |
 | bootstrap.public\_ip | Public IP of the bootstrap instance |
 | iam.agent\_profile | Name of the agent profile |
+| iam.master\_profile | Name of the master profile |
 | lb.masters\_dns\_name | This is the load balancer to access the DC/OS UI |
 | lb.masters\_internal\_dns\_name | This is the load balancer to access the masters internally in the cluster |
 | lb.public\_agents\_dns\_name | This is the load balancer to reach the public agents |
+| masters.aws\_iam\_instance\_profile | Masters instance profile name |
 | masters.instances | Master instances IDs |
 | masters.os\_user | Master instances private OS default user |
 | masters.private\_ips | Master instances private IPs |
 | masters.public\_ips | Master instances public IPs |
+| private\_agents.aws\_iam\_instance\_profile | Private Agent instance profile name |
 | private\_agents.instances | Private Agent instances IDs |
 | private\_agents.os\_user | Private Agent instances private OS default user |
 | private\_agents.private\_ips | Private Agent instances private IPs |
 | private\_agents.public\_ips | Private Agent public IPs |
+| public\_agents.aws\_iam\_instance\_profile | Public Agent instance profile name |
 | public\_agents.instances | Public Agent instances IDs |
 | public\_agents.os\_user | Public Agent instances private OS default user |
 | public\_agents.private\_ips | Public Agent instances private IPs |

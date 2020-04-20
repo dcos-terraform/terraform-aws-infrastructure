@@ -91,7 +91,7 @@ module "dcos-vpc" {
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
   source  = "dcos-terraform/security-groups/aws"
-  version = "~> 0.2.0"
+  version = "~> 0.2.2"
 
   providers = {
     aws = "aws"
@@ -105,6 +105,7 @@ module "dcos-security-groups" {
   public_agents_additional_ports = ["${var.public_agents_additional_ports}"]
   public_agents_access_ips       = ["${var.public_agents_access_ips}"]
   accepted_internal_networks     = ["${var.accepted_internal_networks}"]
+  adminrouter_grpc_proxy_port    = "${var.adminrouter_grpc_proxy_port}"
 }
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
@@ -243,7 +244,7 @@ module "dcos-publicagent-instances" {
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.
 module "dcos-lb" {
   source  = "dcos-terraform/lb-dcos/aws"
-  version = "~> 0.2.0"
+  version = "~> 0.2.1"
 
   providers = {
     aws = "aws"
@@ -266,4 +267,5 @@ module "dcos-lb" {
   masters_internal_acm_cert_arn      = "${var.masters_internal_acm_cert_arn}"
   public_agents_acm_cert_arn         = "${var.public_agents_acm_cert_arn}"
   tags                               = "${var.tags}"
+  adminrouter_grpc_proxy_port        = "${var.adminrouter_grpc_proxy_port}"
 }

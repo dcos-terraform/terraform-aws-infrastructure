@@ -75,3 +75,4 @@ license.txt
 terraform.tfstate
 terraform.tfstate.backup
 *.tfvars
+terraform.log
