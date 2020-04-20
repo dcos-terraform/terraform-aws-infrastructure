@@ -49,6 +49,7 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | cluster\_name | Name of the DC/OS cluster | string | n/a | yes |
 | ssh\_public\_key\_file | Path to SSH public key. This is mandatory but can be set to an empty string if you want to use ssh_public_key with the key as string. | string | n/a | yes |
 | accepted\_internal\_networks | Subnet ranges for all internal networks | list | `<list>` | no |
+| adminrouter\_grpc\_proxy\_port |  | string | `"12379"` | no |
 | availability\_zones | List of availability_zones to be used as the same format that are required by the platform/cloud providers. i.e `['RegionZone']` | list | `<list>` | no |
 | aws\_ami | AMI that will be used for the instances instead of the Mesosphere chosen default images. Custom AMIs must fulfill the Mesosphere DC/OS system-requirements: See https://docs.mesosphere.com/1.12/installing/production/system-requirements/ | string | `""` | no |
 | aws\_create\_s3\_bucket | Create S3 bucket with unique name for exhibitor. | string | `"false"` | no |
