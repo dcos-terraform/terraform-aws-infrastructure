@@ -80,6 +80,8 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | num\_masters | Specify the amount of masters. For redundancy you should have at least 3 | string | `"3"` | no |
 | num\_private\_agents | Specify the amount of private agents. These agents will provide your main resources | string | `"2"` | no |
 | num\_public\_agents | Specify the amount of public agents. These agents will host marathon-lb and edgelb | string | `"1"` | no |
+| open\_admin\_router | Open admin router to public (80+443 on load balancer). WARNING: attackers could take over your cluster | string | `"false"` | no |
+| open\_instance\_ssh | Open SSH on instances to public. WARNING: make sure you use a strong SSH key | string | `"false"` | no |
 | private\_agents\_associate\_public\_ip\_address | [PRIVATE AGENTS] Associate a public ip address with there instances | string | `"true"` | no |
 | private\_agents\_aws\_ami | [PRIVATE AGENTS] AMI to be used | string | `""` | no |
 | private\_agents\_extra\_volumes | [PRIVATE AGENTS] Extra volumes for each private agent | list | `<list>` | no |
@@ -93,6 +95,8 @@ Klick the stated link while being logged into the AWS Console ( Webinterface ) t
 | public\_agents\_access\_ips | List of ips allowed access to public agents. admin_ips are joined to this list | list | `<list>` | no |
 | public\_agents\_acm\_cert\_arn | ACM certifacte to be used for the public agents load balancer | string | `""` | no |
 | public\_agents\_additional\_ports | List of additional ports allowed for public access on public agents (80 and 443 open by default) | list | `<list>` | no |
+| public\_agents\_allow\_dynamic | Allow dynamic / ephemeral ports (49152-65535 see: RFC6335) on public agents public IPs | string | `"false"` | no |
+| public\_agents\_allow\_registered | Allow registered / user ports (1024-49151 see: RFC6335) on public agents public IPs | string | `"false"` | no |
 | public\_agents\_associate\_public\_ip\_address | [PUBLIC AGENTS] Associate a public ip address with there instances | string | `"true"` | no |
 | public\_agents\_aws\_ami | [PUBLIC AGENTS] AMI to be used | string | `""` | no |
 | public\_agents\_extra\_volumes | [PUBLIC AGENTS] Extra volumes for each public agent | list | `<list>` | no |
