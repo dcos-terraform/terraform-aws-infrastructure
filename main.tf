@@ -175,7 +175,7 @@ module "dcos-master-instances" {
 
   cluster_name                    = "${var.cluster_name}"
   aws_subnet_ids                  = ["${module.dcos-vpc.subnet_ids}"]
-  aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
+  aws_security_group_ids          = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin, module.dcos-security-groups.master_lb)}"]
   aws_key_name                    = "${local.aws_key_name}"
   num_masters                     = "${var.num_masters}"
   dcos_instance_os                = "${coalesce(var.masters_os,var.dcos_instance_os)}"
@@ -256,7 +256,7 @@ module "dcos-lb" {
 
   cluster_name                       = "${var.cluster_name}"
   subnet_ids                         = ["${module.dcos-vpc.subnet_ids}"]
-  security_groups_masters            = ["${list(module.dcos-security-groups.admin,module.dcos-security-groups.internal)}"]
+  security_groups_masters            = ["${list(module.dcos-security-groups.admin,module.dcos-security-groups.internal, module.dcos-security-groups.master_lb)}"]
   security_groups_masters_internal   = ["${list(module.dcos-security-groups.internal)}"]
   security_groups_public_agents      = ["${list(module.dcos-security-groups.internal, module.dcos-security-groups.admin)}"]
   master_instances                   = ["${module.dcos-master-instances.instances}"]
