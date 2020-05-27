@@ -20,17 +20,17 @@ output "bootstrap_os_user" {
 
 output "masters_instances" {
   description = "Master instances IDs"
-  value       = [module.dcos-master-instances.instances]
+  value       = module.dcos-master-instances.instances
 }
 
 output "masters_public_ips" {
   description = "Master instances public IPs"
-  value       = [module.dcos-master-instances.public_ips]
+  value       = module.dcos-master-instances.public_ips
 }
 
 output "masters_private_ips" {
   description = "Master instances private IPs"
-  value       = [module.dcos-master-instances.private_ips]
+  value       = module.dcos-master-instances.private_ips
 }
 
 output "masters_os_user" {
@@ -48,17 +48,17 @@ output "masters_aws_iam_instance_profile" {
 
 output "private_agents_instances" {
   description = "Private Agent instances IDs"
-  value       = [module.dcos-privateagent-instances.instances]
+  value       = module.dcos-privateagent-instances.instances
 }
 
 output "private_agents_public_ips" {
   description = "Private Agent public IPs"
-  value       = [module.dcos-privateagent-instances.public_ips]
+  value       = module.dcos-privateagent-instances.public_ips
 }
 
 output "private_agents_private_ips" {
   description = "Private Agent instances private IPs"
-  value       = [module.dcos-privateagent-instances.private_ips]
+  value       = module.dcos-privateagent-instances.private_ips
 }
 
 output "private_agents_os_user" {
@@ -77,17 +77,17 @@ output "private_agents_aws_iam_instance_profile" {
 //Private Agent
 output "public_agents_instances" {
   description = "Public Agent instances IDs"
-  value       = [module.dcos-publicagent-instances.instances]
+  value       = module.dcos-publicagent-instances.instances
 }
 
 output "public_agents_public_ips" {
   description = "Public Agent public IPs"
-  value       = [module.dcos-publicagent-instances.public_ips]
+  value       = module.dcos-publicagent-instances.public_ips
 }
 
 output "public_agents_private_ips" {
   description = "Public Agent instances private IPs"
-  value       = [module.dcos-publicagent-instances.private_ips]
+  value       = module.dcos-publicagent-instances.private_ips
 }
 
 output "public_agents_os_user" {
@@ -155,7 +155,7 @@ output "vpc_main_route_table_id" {
 
 output "vpc_subnet_ids" {
   description = "This is the list of subnet_ids the cluster is in"
-  value       = [module.dcos-vpc.subnet_ids]
+  value       = module.dcos-vpc.subnet_ids
 }
 
 output "aws_key_name" {
