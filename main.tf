@@ -9,7 +9,7 @@
  *```hcl
  * module "dcos-infrastructure" {
  *   source  = "dcos-terraform/infrastructure/aws"
- *   version = "~> 0.2.0"
+ *   version = "~> 0.3.0"
  *
  *   cluster_name = "production"
  *   ssh_public_key = "ssh-rsa ..."
@@ -20,11 +20,11 @@
  * }
  *
  * output "bootstrap-public-ip" {
- *   value = "${module.dcos-infrastructure.bootstrap.public_ip}"
+ *   value = module.dcos-infrastructure.bootstrap_public_ip
  * }
  *
  * output "masters-public-ips" {
- *   value = "${module.dcos-infrastructure.masters.public_ips}"
+ *   value = ${module.dcos-infrastructure.masters_public_ips
  * }
  *```
  *
@@ -83,8 +83,8 @@ locals {
 
 // Create a VPC and subnets
 module "dcos-vpc" {
-  source  = "../terraform-aws-vpc"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/vpc/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
@@ -100,8 +100,8 @@ module "dcos-vpc" {
 
 // Firewall. Create policies for instances and load balancers
 module "dcos-security-groups" {
-  source  = "../terraform-aws-security-groups"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/security-groups/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
@@ -123,8 +123,8 @@ module "dcos-security-groups" {
 
 // Permissions creates instances profiles so you could use Rexray and Kubernetes with AWS support
 module "dcos-iam" {
-  source  = "../terraform-aws-iam"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/iam/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
@@ -150,8 +150,8 @@ resource "aws_s3_bucket" "external_exhibitor" {
 }
 
 module "dcos-bootstrap-instance" {
-  source  = "../terraform-aws-bootstrap"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/bootstrap/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
@@ -178,8 +178,8 @@ module "dcos-bootstrap-instance" {
 }
 
 module "dcos-master-instances" {
-  source  = "../terraform-aws-masters"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/masters/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
@@ -195,7 +195,7 @@ module "dcos-master-instances" {
   aws_key_name         = local.aws_key_name
   num_masters          = var.num_masters
   dcos_instance_os     = coalesce(var.masters_os, var.dcos_instance_os)
-  aws_ami              = var.masters_aws_ami =="" ? var.aws_ami : var.masters_aws_ami
+  aws_ami              = var.masters_aws_ami == "" ? var.aws_ami : var.masters_aws_ami
   aws_root_volume_size = var.masters_root_volume_size
   aws_iam_instance_profile = coalesce(
     var.masters_iam_instance_profile,
@@ -209,8 +209,8 @@ module "dcos-master-instances" {
 }
 
 module "dcos-privateagent-instances" {
-  source  = "../terraform-aws-private-agents"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/private-agents/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
@@ -243,8 +243,8 @@ module "dcos-privateagent-instances" {
 
 // DC/OS tested OSes provides sample AMIs and user-data
 module "dcos-publicagent-instances" {
-  source  = "../terraform-aws-public-agents"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/public-agents/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
@@ -278,8 +278,8 @@ module "dcos-publicagent-instances" {
 
 // Load balancers is providing two load balancers. One for accessing the DC/OS masters and a secondone balancing over public agents.
 module "dcos-lb" {
-  source  = "../terraform-aws-lb-dcos"
-  #version = "~> 0.3.0"
+  source  = "dcos-terraform/lb-dcos/aws"
+  version = "~> 0.3.0"
 
   providers = {
     aws = aws
