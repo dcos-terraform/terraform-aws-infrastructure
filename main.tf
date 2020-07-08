@@ -72,7 +72,7 @@ locals {
 
 // create a ssh-key entry if ssh_public_key is set
 resource "aws_key_pair" "deployer" {
-  count      = local.ssh_key_content == "" ? 0 : 1
+  count      = var.aws_key_name != "" ? 0 : 1
   key_name   = "${var.cluster_name}-deployer-key"
   public_key = local.ssh_key_content
 }
@@ -311,4 +311,3 @@ module "dcos-lb" {
   tags                               = var.tags
   adminrouter_grpc_proxy_port        = var.adminrouter_grpc_proxy_port
 }
-
