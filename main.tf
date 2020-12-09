@@ -179,7 +179,7 @@ module "dcos-bootstrap-instance" {
 
 module "dcos-master-instances" {
   source  = "dcos-terraform/masters/aws"
-  version = "~> 0.3.0"
+  version = "~> 0.3.1"
 
   providers = {
     aws = aws
@@ -197,6 +197,7 @@ module "dcos-master-instances" {
   dcos_instance_os     = coalesce(var.masters_os, var.dcos_instance_os)
   aws_ami              = var.masters_aws_ami == "" ? var.aws_ami : var.masters_aws_ami
   aws_root_volume_size = var.masters_root_volume_size
+  aws_extra_volumes    = var.masters_extra_volumes
   aws_iam_instance_profile = coalesce(
     var.masters_iam_instance_profile,
     module.dcos-iam.aws_master_profile,
