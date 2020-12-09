@@ -149,6 +149,11 @@ variable "masters_user_data" {
   default     = ""
 }
 
+variable "masters_extra_volumes" {
+  description = "[MASTERS] Extra volumes for each private agent"
+  default     = []
+}
+
 variable "private_agents_aws_ami" {
   description = "[PRIVATE AGENTS] AMI to be used"
   default     = ""
@@ -325,4 +330,3 @@ variable "open_instance_ssh" {
   description = "Open SSH on instances to public. WARNING: make sure you use a strong SSH key"
   default     = false
 }
-
